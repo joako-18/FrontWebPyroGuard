@@ -1,0 +1,137 @@
+.users {
+  background: var(--smoke);
+  position: relative;
+}
+
+.users__header { max-width: 640px; margin-bottom: 4rem; }
+
+.users__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.user-card {
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  background: rgba(45,31,14,0.3);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--uc);
+  box-shadow: 0 0 16px var(--uc);
+}
+
+.user-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-3px);
+}
+
+.user-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-card__icon {
+  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,106,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-card__role {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.user-card__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.user-card__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.check {
+  color: var(--uc);
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+/* ── Organizations ── */
+.users__org {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  background: rgba(45,31,14,0.4);
+  border: 1px solid rgba(255,106,0,0.1);
+  border-radius: var(--radius-lg);
+}
+
+.org-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 180px;
+}
+
+.org-icon { font-size: 1.6rem; }
+
+.org-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.org-item strong {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.org-item span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.org-sep {
+  color: rgba(255,106,0,0.3);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .org-sep { display: none; }
+  .users__org { gap: 1.5rem; }
+}

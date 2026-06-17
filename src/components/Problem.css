@@ -1,0 +1,91 @@
+.problem {
+  background: var(--ash);
+  border-top: 1px solid rgba(255,106,0,0.15);
+  border-bottom: 1px solid rgba(255,106,0,0.15);
+}
+.problem::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(255,34,0,0.06), transparent);
+  pointer-events: none;
+}
+.problem__header {
+  max-width: 640px;
+  margin-bottom: 4rem;
+}
+.problem__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5px;
+  background: rgba(255,106,0,0.1);
+  border: 1px solid rgba(255,106,0,0.1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+.problem-card {
+  background: var(--ash);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: background 0.3s;
+}
+.problem-card:hover { background: rgba(45, 31, 14, 0.6); }
+.problem-card__icon {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+.problem-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+.problem-card__desc {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.problem-card__line {
+  position: absolute;
+  bottom: 0; left: 2rem;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-fire);
+  transition: width 0.4s ease;
+}
+.problem-card:hover .problem-card__line { width: calc(100% - 4rem); }
+
+.problem__highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2.5rem;
+  border-left: 3px solid var(--fire-mid);
+  background: rgba(255,106,0,0.05);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.highlight-bar {
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-fire);
+  margin-bottom: 0.5rem;
+}
+blockquote {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.5;
+  font-style: italic;
+}
+cite {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 0.05em;
+}

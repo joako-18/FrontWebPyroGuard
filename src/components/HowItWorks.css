@@ -1,0 +1,202 @@
+.hiw {
+  background: var(--smoke);
+  position: relative;
+}
+.hiw::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,106,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,106,0,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hiw__header { max-width: 640px; margin-bottom: 4rem; }
+
+/* ── Pipeline ── */
+.hiw__pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 4rem;
+}
+
+.pipeline-step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.pipeline-step__connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 1.5rem;
+}
+
+.step-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--fire-mid);
+  background: rgba(255,106,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.step-circle span {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--fire-glow);
+  letter-spacing: 0.05em;
+}
+
+.pipeline-step:hover .step-circle {
+  background: rgba(255,106,0,0.25);
+  box-shadow: 0 0 20px rgba(255,106,0,0.3);
+}
+
+.step-arrow {
+  width: 2px;
+  flex: 1;
+  min-height: 40px;
+  background: linear-gradient(to bottom, var(--fire-mid), rgba(255,106,0,0.1));
+  margin: 4px 0;
+}
+
+.pipeline-step__card {
+  padding: 1.75rem 2rem;
+  background: rgba(45, 31, 14, 0.4);
+  border: 1px solid rgba(255,106,0,0.1);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.pipeline-step__card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gradient-fire);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pipeline-step:hover .pipeline-step__card {
+  border-color: rgba(255,106,0,0.3);
+  background: rgba(45, 31, 14, 0.7);
+}
+.pipeline-step:hover .pipeline-step__card::before { opacity: 1; }
+
+.step-tag {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fire-mid);
+  margin-bottom: 0.5rem;
+}
+
+.step-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.step-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.step-detail {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--fire-glow);
+  background: rgba(255,106,0,0.1);
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: 2px;
+}
+
+/* ── Risk Levels ── */
+.hiw__risk {
+  padding: 3rem;
+  background: rgba(45, 31, 14, 0.5);
+  border: 1px solid rgba(255,106,0,0.15);
+  border-radius: var(--radius-lg);
+}
+
+.risk__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.risk__levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.risk-level {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.risk-level__bar {
+  height: 4px;
+  background: var(--c);
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--c);
+}
+
+.risk-level__pulse {
+  position: absolute;
+  top: 0; left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--c);
+  border-radius: 2px;
+  animation: pulse-ring 2s ease-out infinite;
+  opacity: 0.5;
+}
+
+.risk-level__name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  color: var(--c);
+  margin-top: 0.5rem;
+}
+
+.risk-level__desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+}
+
+@media (max-width: 600px) {
+  .pipeline-step { grid-template-columns: 40px 1fr; gap: 1rem; }
+  .step-circle { width: 36px; height: 36px; }
+}

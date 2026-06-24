@@ -1,21 +1,33 @@
+import { useMemo } from 'react'
 import './CTA.css'
 
 export default function CTA() {
+  const embers = useMemo(() =>
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 6}s`,
+      animationDuration: `${3 + Math.random() * 5}s`,
+      width: `${2 + Math.random() * 3}px`,
+      height: `${2 + Math.random() * 3}px`,
+    })), []
+  )
+
   return (
     <section id="contacto" className="cta">
       <div className="cta__flames">
         {[...Array(12)].map((_, i) => (
-          <div key={i} className="cta-flame" style={{ '--i': i }} />
+          <div key={i} className="cta-flame" style={{ '--i': i } as React.CSSProperties} />
         ))}
       </div>
       <div className="cta__embers">
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="cta-ember" style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 6}s`,
-            animationDuration: `${3 + Math.random() * 5}s`,
-            width: `${2 + Math.random() * 3}px`,
-            height: `${2 + Math.random() * 3}px`,
+        {embers.map((e) => (
+          <div key={e.id} className="cta-ember" style={{
+            left: e.left,
+            animationDelay: e.animationDelay,
+            animationDuration: e.animationDuration,
+            width: e.width,
+            height: e.height,
           }} />
         ))}
       </div>

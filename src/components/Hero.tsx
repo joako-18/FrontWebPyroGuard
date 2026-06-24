@@ -4,7 +4,7 @@ import './Hero.css'
 const NAV_LINKS = ['Problemática', 'Cómo Funciona', 'Funcionalidades', 'Usuarios', 'Tecnología']
 
 export default function Hero() {
-  const embersRef = useRef(null)
+  const embersRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const container = embersRef.current
@@ -57,7 +57,7 @@ export default function Hero() {
 
       <div className="hero__flames">
         {[...Array(7)].map((_, i) => (
-          <div key={i} className="flame-col" style={{ '--i': i }} />
+          <div key={i} className="flame-col" style={{ '--i': i } as React.CSSProperties} />
         ))}
       </div>
 

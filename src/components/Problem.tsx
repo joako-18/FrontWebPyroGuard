@@ -48,7 +48,7 @@ export default function Problem() {
         </div>
         <div className="problem__grid">
           {PROBLEMS.map((p, i) => (
-            <div key={i} className="problem-card" style={{ '--delay': `${i * 0.1}s` }}>
+            <div key={i} className="problem-card" style={{ '--delay': `${i * 0.1}s` } as React.CSSProperties}>
               <div className="problem-card__icon">{p.icon}</div>
               <h3 className="problem-card__title">{p.title}</h3>
               <p className="problem-card__desc">{p.desc}</p>

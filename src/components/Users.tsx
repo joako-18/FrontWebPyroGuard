@@ -85,7 +85,7 @@ export default function Users() {
         </div>
         <div className="users__grid">
           {USERS.map((u, i) => (
-            <div key={i} className="user-card" style={{ '--uc': u.color }}>
+            <div key={i} className="user-card" style={{ '--uc': u.color } as React.CSSProperties}>
               <div className="user-card__header">
                 <span className="user-card__icon">{u.icon}</span>
                 <h3 className="user-card__role">{u.role}</h3>

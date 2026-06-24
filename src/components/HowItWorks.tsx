@@ -86,7 +86,7 @@ export default function HowItWorks() {
           <h3 className="risk__title">Niveles de Clasificación de Riesgo</h3>
           <div className="risk__levels">
             {RISK_LEVELS.map((r, i) => (
-              <div key={i} className="risk-level" style={{ '--c': r.color }}>
+              <div key={i} className="risk-level" style={{ '--c': r.color } as React.CSSProperties}>
                 <div className="risk-level__bar" />
                 <div className="risk-level__pulse" />
                 <span className="risk-level__name">{r.level}</span>

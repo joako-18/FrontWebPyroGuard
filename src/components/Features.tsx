@@ -66,7 +66,7 @@ export default function Features() {
         </div>
         <div className="features__grid">
           {FEATURES.map((f, i) => (
-            <div key={i} className="feature-card" style={{ '--delay': `${i * 0.08}s` }}>
+            <div key={i} className="feature-card" style={{ '--delay': `${i * 0.08}s` } as React.CSSProperties}>
               <div className="feature-card__top">
                 <span className="feature-card__icon">{f.icon}</span>
                 <div className="feature-card__glow" />

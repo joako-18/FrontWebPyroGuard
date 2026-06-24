@@ -32,6 +32,7 @@ export default function Footer() {
           <span>PyroGuard AI — Prevención Activa de Incendios Forestales en Chiapas, México</span>
           <div className="footer__legal">
             <a href="/aviso-de-privacidad" className="footer__legal-link">Aviso de Privacidad</a>
+            <a href="/eliminar-datos" className="footer__legal-link">Eliminar mis datos</a>
           </div>
         </div>
       </div>

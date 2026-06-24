@@ -9,6 +9,7 @@ import CTA from './components/CTA'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import './index.css'
+import DeleteData from './components/DeleteData'
 
 function Home() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aviso-de-privacidad" element={<PrivacyPolicy />} />
+        <Route path="/eliminar-datos" element={<DeleteData />} />
       </Routes>
     </BrowserRouter>
   )

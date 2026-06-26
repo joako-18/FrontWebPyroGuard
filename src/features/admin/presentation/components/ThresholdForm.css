@@ -1,0 +1,82 @@
+.threshold-form-container {
+  background: rgba(26, 16, 8, 0.5);
+  border: 1px solid var(--bark);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+  margin-bottom: 2rem;
+}
+
+.threshold-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin-bottom: 1.2rem;
+}
+
+.threshold-form {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.threshold-level h4 {
+  font-family: var(--font-heading);
+  color: var(--fire-mid);
+  margin-bottom: 0.5rem;
+}
+
+.threshold-level label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.threshold-level input {
+  width: 80px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--bark);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.5rem;
+  color: var(--cream);
+  font-family: var(--font-body);
+}
+
+.threshold-level input:focus {
+  border-color: var(--fire-mid);
+  outline: none;
+}
+
+.btn-save-thresholds {
+  background: var(--gradient-fire);
+  color: var(--smoke);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1.5rem;
+}
+
+.btn-save-thresholds:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-fire);
+}
+
+.btn-save-thresholds:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.threshold-message {
+  color: var(--fire-tip);
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}

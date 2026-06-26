@@ -1,0 +1,140 @@
+.zones-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-description {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .zones-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.zones-card {
+  background: rgba(45, 31, 14, 0.4);
+  border: 1px solid rgba(196, 168, 130, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+}
+
+.section-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--fire-mid);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid rgba(255, 106, 0, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.map-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.map-card .section-subtitle {
+  margin: 1.5rem 1.5rem 1rem;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.zones-count {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.count-number {
+  font-size: 3.5rem;
+  font-family: var(--font-display);
+  color: var(--fire-glow);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(255, 179, 71, 0.3);
+}
+
+.count-label {
+  color: var(--text-dim);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.btn-new-zone {
+  background: var(--gradient-fire);
+  color: var(--smoke);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.btn-new-zone:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-fire);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-dim);
+  font-size: 1.2rem;
+}
+
+.error-state p {
+  color: var(--fire-core);
+  margin-bottom: 1rem;
+}
+
+.btn-retry {
+  background: transparent;
+  border: 1px solid var(--fire-mid);
+  color: var(--fire-mid);
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-retry:hover {
+  background: rgba(255, 106, 0, 0.1);
+}
+
+.error-message {
+  color: var(--fire-core);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}

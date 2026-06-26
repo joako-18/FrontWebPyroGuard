@@ -1,0 +1,130 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--smoke);
+  border: 1px solid rgba(255, 106, 0, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  box-shadow: var(--shadow-card), 0 0 30px rgba(255, 106, 0, 0.05);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--fire-mid);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.modal-title span {
+  background: var(--gradient-fire);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.modal-form .form-group label {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.modal-form .form-group input,
+.modal-form .form-group select {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--bark);
+  border-radius: var(--radius);
+  padding: 0.8rem;
+  color: var(--cream);
+  font-family: var(--font-body);
+  transition: border-color 0.3s;
+}
+
+.modal-form .form-group input:focus,
+.modal-form .form-group select:focus {
+  outline: none;
+  border-color: var(--fire-mid);
+  box-shadow: 0 0 10px rgba(255, 106, 0, 0.1);
+}
+
+/* Reutilizando botones de .btn-primary y .btn-ghost del root */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-actions button {
+  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
+}
+
+/* === Agregar esto al final de UserModal.css existente === */
+
+.modal-error {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  color: #ff8a8a;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* === Agregar esto al final de UserModal.css existente === */
+
+.modal-readonly-info {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 106, 0, 0.1);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-readonly-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.modal-readonly-info strong {
+  color: var(--white);
+}

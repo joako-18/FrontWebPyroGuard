@@ -1,0 +1,254 @@
+/* Cabecera reutilizada */
+.header-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--text-dim);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.btn-new {
+  background: var(--gradient-fire);
+  color: var(--smoke);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-new:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-fire);
+}
+
+/* Tarjetas de Resumen */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  background-color: rgba(26, 16, 8, 0.6);
+  border: 1px solid var(--bark);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.icon-muted {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.summary-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+/* Cuadrícula de Brigadas */
+.brigades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.brigade-card {
+  background-color: rgba(26, 16, 8, 0.4);
+  border: 1px solid var(--bark);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.brigade-card:hover {
+  border-color: rgba(255, 106, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.brigade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.brigade-id {
+  font-family: var(--font-heading);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.badge-disponible {
+  color: #4ade80; /* Verde suave */
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.badge-activa {
+  color: var(--fire-glow);
+  border: 1px solid rgba(255, 106, 0, 0.3);
+  background: rgba(255, 106, 0, 0.05);
+}
+
+.badge-fuera-de-servicio {
+  color: var(--text-muted);
+  border: 1px solid var(--bark);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.brigade-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.brigade-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.brigade-meta-actions {
+  margin-bottom: 1rem;
+}
+
+.btn-icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  color: var(--text-dim);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-icon-text:hover {
+  background: rgba(196, 168, 130, 0.1);
+  color: var(--white);
+  border-color: var(--text-dim);
+}
+
+.brigade-zone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fire-glow);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.brigade-zone span {
+  font-weight: 700;
+}
+
+.brigade-action {
+  margin-top: auto; /* Empuja el botón al fondo si la tarjeta crece */
+  padding-top: 1rem;
+}
+
+/* Botones dentro de la tarjeta */
+.btn-outline-action {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--fire-mid);
+  color: var(--fire-glow);
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline-action:hover {
+  background: rgba(255, 106, 0, 0.1);
+  color: var(--white);
+}
+
+.btn-disabled {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--bark);
+  color: var(--text-muted);
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  cursor: not-allowed;
+}
+
+.modal-select {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: rgba(26, 16, 8, 0.8);
+  border: 1px solid var(--bark);
+  border-radius: 4px;
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.modal-select:focus {
+  border-color: var(--fire-glow);
+}
+
+@media (max-width: 1024px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .brigades-grid { grid-template-columns: 1fr; }
+}

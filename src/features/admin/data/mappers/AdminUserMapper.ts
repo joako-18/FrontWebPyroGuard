@@ -1,0 +1,22 @@
+import type { UserDTO } from '../dto/UserDTO';
+import type { AdminUser, Role } from '../../domain/entities/AdminUser';
+
+/**
+ * Mapper: traduce entre la forma de la API (DTO) y la forma de dominio (Entity).
+ */
+export const AdminUserMapper = {
+  toDomain(dto: UserDTO): AdminUser {
+    return {
+      id: dto.id_usuario,
+      name: dto.nombre,
+      email: dto.email,
+      role: dto.rol as Role,
+      isActive: dto.activo,
+      createdAt: dto.creado_en,
+    };
+  },
+
+  toDomainList(dtos: UserDTO[]): AdminUser[] {
+    return dtos.map(AdminUserMapper.toDomain);
+  },
+};

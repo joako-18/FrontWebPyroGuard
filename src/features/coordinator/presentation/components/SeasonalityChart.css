@@ -1,0 +1,85 @@
+.seasonality-chart {
+  background: rgba(26, 16, 8, 0.6);
+  border: 1px solid rgba(255, 106, 0, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.seasonality-chart__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.seasonality-chart__title {
+  font-family: var(--font-display);
+  color: var(--white);
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+.seasonality-chart__total {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.seasonality-chart__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  height: 160px;
+}
+
+.seasonality-chart__bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.seasonality-chart__bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.seasonality-chart__bar {
+  width: 100%;
+  min-height: 2px;
+  background: var(--gradient-fire);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.seasonality-chart__bar--peak {
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.5);
+}
+
+.seasonality-chart__bar-col:hover .seasonality-chart__bar {
+  opacity: 1;
+}
+
+.seasonality-chart__bar-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.seasonality-chart__insight {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-top: 1px solid rgba(255, 106, 0, 0.1);
+  padding-top: 0.75rem;
+}
+
+.seasonality-chart__insight strong {
+  color: var(--fire-glow);
+}

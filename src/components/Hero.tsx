@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './Hero.css'
 
 const NAV_LINKS = ['Problemática', 'Cómo Funciona', 'Funcionalidades', 'Usuarios', 'Tecnología']
@@ -43,7 +44,10 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-          <a href="#contacto" className="hero__nav-cta">Ver Demo</a>
+          {/* Botón actualizado para navegar a la vista de Login */}
+          <Link to="/login" className="hero__nav-cta">
+            Iniciar Sesión
+          </Link>
         </div>
       </nav>
 

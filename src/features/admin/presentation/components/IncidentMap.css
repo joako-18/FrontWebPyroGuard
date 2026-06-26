@@ -1,0 +1,18 @@
+.incident-map-wrapper {
+  border: 1px solid var(--bark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 400px;
+  margin-bottom: 2rem;
+}
+
+.incident-map {
+  width: 100%;
+  height: 100%;
+}
+
+.incident-popup {
+  font-family: var(--font-body);
+  color: var(--smoke);
+  font-size: 0.85rem;
+}

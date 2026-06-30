@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { CheckCircle2, Activity, AlertTriangle, UserPlus, MapPin } from 'lucide-react';
+import { CheckCircle2, Activity, AlertTriangle, UserPlus } from 'lucide-react';
 import BrigadeModal from '../components/BrigadeModal';
 import AssignZoneModal from '../components/AssignZoneModal';
 import AssignMemberModal from '../components/AssignMemberModal';

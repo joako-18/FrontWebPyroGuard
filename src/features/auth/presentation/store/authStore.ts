@@ -2,14 +2,15 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { AuthSession } from '../../domain/entities/AuthSession';
 
-type Role = 'admin' | 'coordinator';
+import type { Role } from '../../domain/entities/User';
 
 interface AuthState {
   accessToken: string | null;
   tokenType: string | null;
   role: Role | null;
+  userName: string | null;
   isAuthenticated: boolean;
-  setSession: (session: AuthSession, role: Role) => void;
+  setSession: (session: AuthSession, role: Role, userName: string) => void;
   logout: () => void;
 }
 
@@ -23,13 +24,15 @@ export const useAuthStore = create<AuthState>()(
       accessToken: null,
       tokenType: null,
       role: null,
+      userName: null,
       isAuthenticated: false,
 
-      setSession: (session, role) =>
+      setSession: (session, role, userName) =>
         set({
           accessToken: session.accessToken,
           tokenType: session.tokenType,
           role,
+          userName,
           isAuthenticated: true,
         }),
 
@@ -38,6 +41,7 @@ export const useAuthStore = create<AuthState>()(
           accessToken: null,
           tokenType: null,
           role: null,
+          userName: null,
           isAuthenticated: false,
         }),
     }),

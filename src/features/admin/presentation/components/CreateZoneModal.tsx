@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-draw';
@@ -33,7 +33,7 @@ function DrawControl({ onCreated }: { onCreated: (geojson: Record<string, unknow
 
     map.addControl(drawControl);
 
-    const handleCreated = (e: L.DrawEvents.Created) => {
+    const handleCreated = (e: any) => {
       const layer = e.layer;
       onCreated(layer.toGeoJSON() as Record<string, unknown>);
       // Opcional: limpiar capa anterior? El control maneja su propia FeatureGroup

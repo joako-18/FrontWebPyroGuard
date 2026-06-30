@@ -10,6 +10,11 @@ export const AuthMapper = {
     return {
       accessToken: dto.access_token,
       tokenType: dto.token_type,
+      user: dto.usuario ? {
+        id: dto.usuario.id_usuario,
+        name: dto.usuario.nombre,
+        role: dto.usuario.rol,
+      } : undefined,
     };
   },
 };

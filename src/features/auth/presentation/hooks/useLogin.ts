@@ -2,9 +2,22 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUseCase } from '../../domain/useCases/LoginUseCase';
 import { useAuthStore } from '../store/authStore';
-import { ApiError } from '../../../../shared/api/httpClient';
+import { ApiError, httpClient } from '../../../../shared/api/httpClient';
 
-type Role = 'admin' | 'coordinator';
+import type { Role } from '../../domain/entities/User';
+
+function parseJwt(token: string) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    return null;
+  }
+}
 
 /**
  * Hook de presentación: es el ÚNICO puente entre la UI (Login.tsx)
@@ -17,18 +30,55 @@ export function useLogin() {
   const setSession = useAuthStore((state) => state.setSession);
   const navigate = useNavigate();
 
-  async function login(email: string, password: string, role: Role) {
+  async function login(email: string, password: string) {
     setIsLoading(true);
     setError(null);
 
     try {
       const session = await loginUseCase(email, password);
-      setSession(session, role);
+      
+      let role: Role = 'Admin';
+      let userName: string = email.split('@')[0];
 
-      if (role === 'admin') {
+      if (session.user) {
+        role = (session.user.role as Role) || 'Admin';
+        userName = session.user.name || userName;
+      } else {
+        // Fallback en caso de que la API no regrese el objeto "usuario" en el login
+        const payload = parseJwt(session.accessToken);
+        const userId = payload?.sub;
+        if (userId) {
+          try {
+            const userData = await httpClient<any>(`/v1/usuarios/${userId}`, {
+              headers: { Authorization: `Bearer ${session.accessToken}` }
+            });
+            role = userData.rol || userData.role || 'Admin';
+            userName = userData.nombre || userData.name || userName;
+          } catch (error) {
+            if (email.toLowerCase().includes('coord')) role = 'Coordinador';
+          }
+        } else {
+          if (email.toLowerCase().includes('coord')) role = 'Coordinador';
+        }
+      }
+      
+      // Normalización de roles para asegurar que coincidan con la lógica del frontend
+      if (typeof role === 'string') {
+        const lowerRole = role.toLowerCase();
+        if (lowerRole.includes('admin')) role = 'Admin';
+        else if (lowerRole.includes('coord')) role = 'Coordinador';
+        else if (lowerRole.includes('analist')) role = 'Analista';
+        else if (lowerRole.includes('brigad')) role = 'Brigadista';
+      }
+      
+      console.log("Detected Role:", role, "User Name:", userName);
+      
+      setSession(session, role, userName);
+
+      if (role === 'Admin') {
         navigate('/admin/usuarios');
       } else {
-        navigate('/coordinator/brigadas');
+        navigate('/coordinator/dashboard');
       }
     } catch (err) {
       if (err instanceof ApiError) {

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useCitizenReports } from '../hooks/useCitizenReports';
 import { useObservations } from '../hooks/useObservations';
 import './ReportsPage.css';
@@ -23,9 +24,22 @@ const getStatusLabel = (estado: string) => {
 export default function ReportsPage() {
   const { reports, isLoading: loadingReports, error: errorReports, refetch } = useCitizenReports();
   const { zones, selectedZone, setSelectedZone, observations, isLoading: loadingObs, error: errorObs } = useObservations();
+  
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <div className="reports-page fade-up">
+      {selectedImage && (
+        <div className="image-modal-overlay fade-in" onClick={() => setSelectedImage(null)}>
+          <div className="image-modal-content fade-up" onClick={(e) => e.stopPropagation()}>
+            <button className="image-modal-close" onClick={() => setSelectedImage(null)}>
+              ✕
+            </button>
+            <img src={selectedImage} alt="Foto del reporte" className="image-modal-img" />
+          </div>
+        </div>
+      )}
+
       <header className="page-header">
         <h1 className="page-title">Reportes y Observaciones</h1>
       </header>
@@ -66,7 +80,11 @@ export default function ReportsPage() {
 
               {!loadingReports &&
                 reports.map((report) => (
-                  <tr key={report.id}>
+                  <tr 
+                    key={report.id} 
+                    onClick={() => { if (report.fotoUrl) setSelectedImage(report.fotoUrl); }}
+                    className={report.fotoUrl ? "clickable-row" : ""}
+                  >
                     <td className="desc-cell">{report.descripcion}</td>
                     <td>{report.latitud.toFixed(4)}, {report.longitud.toFixed(4)}</td>
                     <td>
@@ -81,7 +99,12 @@ export default function ReportsPage() {
                     </td>
                     <td>
                       {report.fotoUrl ? (
-                        <a href={report.fotoUrl} target="_blank" rel="noopener noreferrer" className="photo-link">Ver foto</a>
+                        <button 
+                          className="photo-link" 
+                          onClick={(e) => { e.stopPropagation(); setSelectedImage(report.fotoUrl!); }}
+                        >
+                          Ver foto
+                        </button>
                       ) : (
                         <span className="no-photo">—</span>
                       )}

@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { useLogin } from '../hooks/useLogin';
 import './Login.css';
 
-type Role = 'admin' | 'coordinator';
-
 export default function Login() {
-  const [role, setRole] = useState<Role>('admin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const embersRef = useRef<HTMLDivElement>(null);
@@ -36,7 +33,7 @@ export default function Login() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    login(email, password, role);
+    login(email, password);
   };
 
   return (
@@ -64,26 +61,6 @@ export default function Login() {
             <p className="login__subtitle">Ingresa tus credenciales para continuar</p>
           </div>
 
-          {/* Selector de Rol */}
-          <div className="login__role-tabs">
-            <button
-              className={`role-tab ${role === 'admin' ? 'active' : ''}`}
-              onClick={() => setRole('admin')}
-              type="button"
-              disabled={isLoading}
-            >
-              Administrador
-            </button>
-            <button
-              className={`role-tab ${role === 'coordinator' ? 'active' : ''}`}
-              onClick={() => setRole('coordinator')}
-              type="button"
-              disabled={isLoading}
-            >
-              Coordinador
-            </button>
-          </div>
-
           <form className="login__form" onSubmit={handleSubmit}>
             {error && (
               <div className="login__error" role="alert">
@@ -98,7 +75,7 @@ export default function Login() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={`correo@${role === 'admin' ? 'admin' : 'coord'}.pyroguard.mx`}
+                placeholder="correo@pyroguard.mx"
                 disabled={isLoading}
                 required
               />
@@ -127,9 +104,7 @@ export default function Login() {
             </div>
 
             <button type="submit" className="btn-primary login__btn" disabled={isLoading}>
-              {isLoading
-                ? 'Ingresando...'
-                : `Iniciar Sesión como ${role === 'admin' ? 'Administrador' : 'Coordinador'}`}
+              {isLoading ? 'Ingresando...' : 'Iniciar Sesión'}
             </button>
           </form>
         </div>

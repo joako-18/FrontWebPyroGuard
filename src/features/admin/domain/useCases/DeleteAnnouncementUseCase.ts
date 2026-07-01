@@ -1,9 +1,6 @@
 import type { IAnnouncementRepository } from '../repository/AnnouncementRepository';
 import { AnnouncementRepositoryImpl } from '../../data/repository/AnnouncementRepositoryImpl';
 
-/**
- * Caso de uso: eliminar un comunicado por su id.
- */
 export function createDeleteAnnouncementUseCase(
   repository: IAnnouncementRepository = AnnouncementRepositoryImpl
 ) {

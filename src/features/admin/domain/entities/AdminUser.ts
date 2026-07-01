@@ -1,10 +1,3 @@
-/**
- * Entidad de dominio: representa el concepto de negocio "Usuario"
- * desde la perspectiva del panel de administración.
- *
- * Se llama AdminUser (no User) para no chocar con la entidad User
- * del feature de auth (que representa al usuario recién registrado).
- */
 
 export type Role = 'Admin' | 'Coordinador' | 'Analista' | 'Brigadista';
 

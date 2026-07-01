@@ -44,7 +44,7 @@ export default function ReportsPage() {
         <h1 className="page-title">Reportes y Observaciones</h1>
       </header>
 
-      {/* --- SECCIÓN: REPORTES CIUDADANOS --- */}
+      {}
       <section className="reports-section">
         <h2 className="section-subtitle">Reportes Ciudadanos</h2>
         {errorReports && (
@@ -116,7 +116,7 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* --- SECCIÓN: OBSERVACIONES DE BRIGADISTAS --- */}
+      {}
       <section className="reports-section" style={{ marginTop: '3rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <h2 className="section-subtitle">Observaciones de Brigadistas</h2>

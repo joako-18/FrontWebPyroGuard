@@ -1,8 +1,5 @@
 import type { Announcement, AlertLevel } from '../entities/Announcement';
 
-/**
- * Contrato de dominio: define QUÉ se puede hacer, no CÓMO.
- */
 export interface IAnnouncementRepository {
   create(
     title: string,

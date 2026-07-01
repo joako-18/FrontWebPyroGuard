@@ -24,7 +24,7 @@ export default function CoordinatorLayout() {
   
   return (
     <div className="coord-layout">
-      {/* Sidebar Izquierdo */}
+      {}
       <aside className="coord-sidebar">
         <div className="sidebar-brand">
           <div className="brand-logo-box"></div>
@@ -69,7 +69,7 @@ export default function CoordinatorLayout() {
         </div>
       </aside>
 
-      {/* Contenedor Principal */}
+      {}
       <main className="coord-main">
         <Outlet />
       </main>

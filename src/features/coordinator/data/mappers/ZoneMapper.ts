@@ -1,20 +1,11 @@
 import type { ZoneDTO } from '../dto/ZoneDTO';
 import type { Zone } from '../../domain/entities/Zone';
 
-/**
- * Coordenadas de respaldo (centro aproximado) de Reservas de la Biosfera
- * reales en Chiapas, usadas SOLO mientras la API no incluya latitud/longitud
- * en la respuesta de /ml/api/v1/zonas/. Si el backend ya las provee,
- * el mapper las usa directamente y este fallback se ignora.
- *
- * Fuente: límites geográficos publicados por CONABIO/CONANP.
- */
 const FALLBACK_COORDINATES: Record<string, { lat: number; lng: number }> = {
   'El Triunfo': { lat: 15.62, lng: -92.84 },
   'La Sepultura': { lat: 16.15, lng: -93.65 },
 };
 
-/** Coordenada genérica (centro de Chiapas) para zonas totalmente desconocidas */
 const DEFAULT_FALLBACK = { lat: 16.75, lng: -93.1 };
 
 export const ZoneMapper = {
@@ -28,7 +19,7 @@ export const ZoneMapper = {
       try {
         parsedGeojson = JSON.parse(dto.geojson);
         hasRealCoordinates = true;
-        // Aproximar centro con el primer punto del polígono
+        
         if (parsedGeojson.coordinates?.[0]?.[0]) {
           lng = parsedGeojson.coordinates[0][0][0];
           lat = parsedGeojson.coordinates[0][0][1];

@@ -9,12 +9,9 @@ import './UserModal.css';
 interface UserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  /** Si se provee, el modal entra en modo "editar" precargado con estos datos */
-  userToEdit?: AdminUser | null;
-  /** Se llama tras crear con éxito */
-  onUserCreated?: () => void;
-  /** Se llama tras editar con éxito: (id, rol, activo) */
-  onUserUpdated?: (id: string, role: Role, isActive: boolean) => Promise<boolean>;
+    userToEdit?: AdminUser | null;
+    onUserCreated?: () => void;
+    onUserUpdated?: (id: string, role: Role, isActive: boolean) => Promise<boolean>;
 }
 
 export default function UserModal({

@@ -2,9 +2,6 @@ import type { IAnnouncementRepository } from '../repository/AnnouncementReposito
 import type { Announcement } from '../entities/Announcement';
 import { AnnouncementRepositoryImpl } from '../../data/repository/AnnouncementRepositoryImpl';
 
-/**
- * Caso de uso: obtener el historial completo de comunicados (vigentes y vencidos).
- */
 export function createGetAnnouncementsHistoryUseCase(
   repository: IAnnouncementRepository = AnnouncementRepositoryImpl
 ) {

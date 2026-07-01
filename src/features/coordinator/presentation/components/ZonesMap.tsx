@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, CircleMarker, Popup, GeoJSON } from 'react-leaflet';
 import type { Zone } from '../../domain/entities/Zone';
+import type { GeoJsonObject } from 'geojson';
 import 'leaflet/dist/leaflet.css';
 import './ZonesMap.css';
 
@@ -7,7 +8,6 @@ interface ZonesMapProps {
   zones: Zone[];
 }
 
-/** Centro por defecto: aproximadamente el centro geográfico de Chiapas */
 const DEFAULT_CENTER: [number, number] = [16.75, -93.1];
 const DEFAULT_ZOOM = 7;
 
@@ -31,7 +31,7 @@ export default function ZonesMap({ zones }: ZonesMapProps) {
             return (
               <GeoJSON
                 key={`geojson-${zone.id}`}
-                data={zone.geojson}
+                data={zone.geojson as unknown as GeoJsonObject}
                 pathOptions={{
                   color: '#ff6a00',
                   fillColor: '#ff6a00',

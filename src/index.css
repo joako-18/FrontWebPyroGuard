@@ -42,7 +42,7 @@ body {
 
 .app { position: relative; }
 
-/* ── Utility ── */
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -89,12 +89,12 @@ body {
   line-height: 1.7;
 }
 
-/* ── Scrollbar ── */
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--smoke); }
 ::-webkit-scrollbar-thumb { background: var(--fire-mid); border-radius: 3px; }
 
-/* ── Animations ── */
+
 @keyframes flicker {
   0%, 100% { opacity: 1; transform: scaleY(1); }
   33% { opacity: 0.85; transform: scaleY(0.97) skewX(1deg); }
@@ -113,12 +113,12 @@ body {
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes scanLine {
@@ -131,14 +131,14 @@ body {
   animation: fadeUp 0.7s ease forwards;
 }
 
-/* ── Section base ── */
+
 section {
   position: relative;
   padding: 6rem 0;
   overflow: hidden;
 }
 
-/* ── Divider ── */
+
 .fire-divider {
   width: 100%;
   height: 3px;

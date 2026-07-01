@@ -1,9 +1,5 @@
-/**
- * Entidad de dominio: representa el histórico de incendios por mes
- * para una zona específica.
- */
 export interface MonthlyCount {
-  month: number; // 1-12
+  month: number; 
   count: number;
 }
 

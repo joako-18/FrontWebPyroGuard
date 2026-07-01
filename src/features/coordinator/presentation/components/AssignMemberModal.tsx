@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { useBrigades } from '../hooks/useBrigades';
+import type { MinimalUser } from '../../domain/repository/OperationsRepository';
 
 interface AssignMemberModalProps {
   isOpen: boolean;
@@ -12,20 +13,28 @@ interface AssignMemberModalProps {
 export default function AssignMemberModal({ isOpen, onClose, onSave, brigadeId }: AssignMemberModalProps) {
   const [memberId, setMemberId] = useState('');
   const [saving, setSaving] = useState(false);
-  const [brigadistas, setBrigadistas] = useState<any[]>([]);
+  const [brigadistas, setBrigadistas] = useState<MinimalUser[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
   
   const { getBrigadistas } = useBrigades();
 
   useEffect(() => {
+    let active = true;
     if (isOpen) {
-      setLoadingUsers(true);
+      Promise.resolve().then(() => {
+        if (active) setLoadingUsers(true);
+      });
       getBrigadistas()
-        .then((data) => setBrigadistas(data))
+        .then((data) => {
+          if (active) setBrigadistas(data);
+        })
         .catch((err) => console.error("Error fetching brigadistas", err))
-        .finally(() => setLoadingUsers(false));
+        .finally(() => {
+          if (active) setLoadingUsers(false);
+        });
     }
-  }, [isOpen]);
+    return () => { active = false; };
+  }, [isOpen, getBrigadistas]);
 
   if (!isOpen) return null;
 

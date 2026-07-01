@@ -1,4 +1,4 @@
-// ThresholdDTO.ts
+
 export interface ThresholdLevelDTO {
   temp: number;
   hum: number;

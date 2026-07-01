@@ -25,7 +25,7 @@ export default function DashboardPage() {
 
       {!isLoading && !error && (
         <>
-          {/* Tarjetas resumen */}
+          {}
           <div className="dashboard-summary-grid">
             <div className="summary-card">
               <div className="summary-header">
@@ -47,7 +47,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Mapa */}
+          {}
           <section className="dashboard-section">
             <h2 className="dashboard-section__title">Zonas en el mapa</h2>
             <ZonesMap zones={zones} />
@@ -59,7 +59,7 @@ export default function DashboardPage() {
             )}
           </section>
 
-          {/* Estacionalidad por zona */}
+          {}
           <section className="dashboard-section">
             <h2 className="dashboard-section__title">Estacionalidad de incendios por zona</h2>
             <div className="dashboard-charts-grid">

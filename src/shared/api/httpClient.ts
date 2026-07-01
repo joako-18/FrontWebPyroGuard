@@ -1,10 +1,5 @@
 import { ENV } from '../config/env';
 
-/**
- * Error tipado para fallos de la API.
- * Permite a las capas superiores (useCases, hooks) reaccionar
- * según el status code sin parsear strings.
- */
 export class ApiError extends Error {
   status: number;
   body: unknown;
@@ -18,13 +13,10 @@ export class ApiError extends Error {
 }
 
 interface RequestOptions extends RequestInit {
-  /** Si es true, no se adjunta el header Authorization aunque exista token */
-  skipAuth?: boolean;
-  /** Permite apuntar a un dominio distinto al de ENV.API_BASE_URL (ej. servicio de ML) */
-  baseUrlOverride?: string;
+    skipAuth?: boolean;
+    baseUrlOverride?: string;
 }
 
-/** Forma típica de error de validación 422 de FastAPI */
 interface FastApiValidationError {
   detail?:
     | Array<{
@@ -35,11 +27,6 @@ interface FastApiValidationError {
     | string;
 }
 
-/**
- * Convierte el cuerpo de error de FastAPI en un mensaje legible.
- * FastAPI manda `detail` como string en errores simples (401, 404, etc.)
- * pero como ARRAY de objetos en errores de validación 422.
- */
 function extractErrorMessage(body: unknown, status: number): string {
   const fastApiBody = body as FastApiValidationError;
 
@@ -63,9 +50,6 @@ function extractErrorMessage(body: unknown, status: number): string {
   return `Error en la petición (${status})`;
 }
 
-/**
- * Devuelve el token guardado en localStorage (clave usada por el authStore).
- */
 function getStoredToken(): string | null {
   try {
     const raw = localStorage.getItem('auth-storage');
@@ -77,12 +61,6 @@ function getStoredToken(): string | null {
   }
 }
 
-/**
- * Cliente HTTP centralizado. Todas las dataSources de la app deben
- * usar esta función en vez de fetch directo.
- * Por defecto apunta a ENV.API_BASE_URL; pasa `baseUrlOverride` para
- * hablar con otros dominios (ej. el servicio de ML en ENV.ML_API_BASE_URL).
- */
 export async function httpClient<TResponse>(
   path: string,
   options: RequestOptions = {}

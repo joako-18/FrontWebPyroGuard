@@ -4,9 +4,6 @@ import { AnnouncementRepositoryImpl } from '../../data/repository/AnnouncementRe
 
 const VALID_ALERT_LEVELS: AlertLevel[] = ['info', 'preventive', 'critical'];
 
-/**
- * Caso de uso: publicar un nuevo comunicado, con validaciones de negocio.
- */
 export function createCreateAnnouncementUseCase(
   repository: IAnnouncementRepository = AnnouncementRepositoryImpl
 ) {

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Incident } from '../../domain/entities/Incident';
 import type { ThresholdConfig } from '../../domain/entities/ThresholdConfig';
@@ -29,7 +28,7 @@ export function useZonesData() {
     let cancelled = false;
 
     const load = async () => {
-      // isLoading ya está en true al montar, y lo ponemos en true en cada refetch
+      
       if (fetchKey > 0) {
         setIsLoading(true);
         setError(null);

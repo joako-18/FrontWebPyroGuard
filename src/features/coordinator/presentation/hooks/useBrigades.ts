@@ -11,9 +11,11 @@ export function useBrigades() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchBrigades = useCallback(async () => {
-    try {
+    Promise.resolve().then(() => {
       setIsLoading(true);
       setError(null);
+    });
+    try {
       const data = await repo.getBrigades();
       setBrigades(data);
     } catch (err) {
@@ -24,7 +26,8 @@ export function useBrigades() {
   }, []);
 
   useEffect(() => {
-    fetchBrigades();
+    const timer = setTimeout(fetchBrigades, 0);
+    return () => clearTimeout(timer);
   }, [fetchBrigades]);
 
   const createBrigade = async (name: string, coordinatorId: string) => {

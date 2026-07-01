@@ -14,7 +14,7 @@ function parseJwt(token: string) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -44,17 +44,17 @@ export function useLogin() {
         role = (session.user.role as Role) || 'Admin';
         userName = session.user.name || userName;
       } else {
-        // Fallback en caso de que la API no regrese el objeto "usuario" en el login
+        
         const payload = parseJwt(session.accessToken);
         const userId = payload?.sub;
         if (userId) {
           try {
-            const userData = await httpClient<any>(`/v1/usuarios/${userId}`, {
+            const userData = await httpClient<{rol?: string, role?: string, nombre?: string, name?: string}>(`/v1/usuarios/${userId}`, {
               headers: { Authorization: `Bearer ${session.accessToken}` }
             });
-            role = userData.rol || userData.role || 'Admin';
+            role = (userData.rol || userData.role || 'Admin') as Role;
             userName = userData.nombre || userData.name || userName;
-          } catch (error) {
+          } catch {
             if (email.toLowerCase().includes('coord')) role = 'Coordinador';
           }
         } else {
@@ -62,7 +62,7 @@ export function useLogin() {
         }
       }
       
-      // Normalización de roles para asegurar que coincidan con la lógica del frontend
+      
       if (typeof role === 'string') {
         const lowerRole = role.toLowerCase();
         if (lowerRole.includes('admin')) role = 'Admin';
@@ -70,8 +70,6 @@ export function useLogin() {
         else if (lowerRole.includes('analist')) role = 'Analista';
         else if (lowerRole.includes('brigad')) role = 'Brigadista';
       }
-      
-      console.log("Detected Role:", role, "User Name:", userName);
       
       setSession(session, role, userName);
 

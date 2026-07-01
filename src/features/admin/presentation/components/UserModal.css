@@ -15,7 +15,7 @@
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   position: relative;
   box-shadow: var(--shadow-card), 0 0 30px rgba(255, 106, 0, 0.05);
 }
@@ -84,7 +84,7 @@
   box-shadow: 0 0 10px rgba(255, 106, 0, 0.1);
 }
 
-/* Reutilizando botones de .btn-primary y .btn-ghost del root */
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -97,7 +97,7 @@
   padding: 0.7rem 1.5rem;
 }
 
-/* === Agregar esto al final de UserModal.css existente === */
+
 
 .modal-error {
   background: rgba(220, 38, 38, 0.12);
@@ -109,7 +109,7 @@
   text-align: center;
 }
 
-/* === Agregar esto al final de UserModal.css existente === */
+
 
 .modal-readonly-info {
   background: rgba(255, 255, 255, 0.03);

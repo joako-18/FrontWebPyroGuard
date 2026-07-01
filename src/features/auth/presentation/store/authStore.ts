@@ -14,10 +14,6 @@ interface AuthState {
   logout: () => void;
 }
 
-/**
- * Store global de sesión. Persiste en localStorage bajo la clave
- * "auth-storage" (la misma que lee shared/api/httpClient.ts).
- */
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -46,7 +42,7 @@ export const useAuthStore = create<AuthState>()(
         }),
     }),
     {
-      name: 'auth-storage', // clave en localStorage
+      name: 'auth-storage', 
     }
   )
 );

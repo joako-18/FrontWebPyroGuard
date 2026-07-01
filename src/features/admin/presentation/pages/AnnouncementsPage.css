@@ -76,7 +76,7 @@
   color: var(--cream);
   font-size: 0.95rem;
   line-height: 1.5;
-  padding-left: 24px; /* Alinear con el texto del título, saltando el dot */
+  padding-left: 24px; 
 }
 
 .card-footer {
@@ -101,7 +101,7 @@
   gap: 12px;
 }
 
-/* === Agregar esto al final de AnnouncementsPage.css existente === */
+
 
 .header-actions {
   display: flex;

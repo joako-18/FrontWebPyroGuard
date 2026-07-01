@@ -4,7 +4,7 @@
   padding: 2rem;
 }
 
-/* Estado badges */
+
 .status-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
@@ -34,7 +34,7 @@
   border: 1px solid rgba(158, 158, 158, 0.3);
 }
 
-/* Tabla */
+
 .reports-table {
   width: 100%;
   border-collapse: collapse;
@@ -116,7 +116,7 @@
   color: var(--text-muted);
 }
 
-/* Reutilizamos estilos globales de la app */
+
 .page-error {
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.35);
@@ -147,7 +147,7 @@
   background: rgba(255, 106, 0, 0.1);
 }
 
-/* Image Modal */
+
 .image-modal-overlay {
   position: fixed;
   top: 0;

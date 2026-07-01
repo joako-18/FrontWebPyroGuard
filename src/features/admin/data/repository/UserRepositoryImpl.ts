@@ -3,9 +3,6 @@ import type { AdminUser, Role } from '../../domain/entities/AdminUser';
 import { UserRemoteDataSource } from '../dataSources/UserRemoteDataSource';
 import { AdminUserMapper } from '../mappers/AdminUserMapper';
 
-/**
- * Implementación concreta: orquesta dataSource + mapper.
- */
 export const UserRepositoryImpl: IUserRepository = {
   async getAll(): Promise<AdminUser[]> {
     const dtos = await UserRemoteDataSource.getAll();

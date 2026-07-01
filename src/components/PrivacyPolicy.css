@@ -5,7 +5,7 @@
   font-family: var(--font-body);
 }
 
-/* ── Hero ── */
+
 .privacy__hero {
   position: relative;
   padding: 6rem 0 4rem;
@@ -90,7 +90,7 @@
   letter-spacing: 0.05em;
 }
 
-/* ── Body layout ── */
+
 .privacy__body {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -100,7 +100,7 @@
   align-items: flex-start;
 }
 
-/* ── Sidebar ── */
+
 .privacy__sidebar {
   position: sticky;
   top: 6rem;
@@ -138,7 +138,7 @@
   background: rgba(255,106,0,0.08);
 }
 
-/* ── Content ── */
+
 .privacy__content {
   display: flex;
   flex-direction: column;
@@ -198,7 +198,7 @@
   margin-top: 0.2rem;
 }
 
-/* ── Notice box ── */
+
 .privacy__notice {
   display: flex;
   gap: 1rem;
@@ -217,7 +217,7 @@
   margin: 0 !important;
 }
 
-/* ── Providers ── */
+
 .privacy__providers {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -247,7 +247,7 @@
   line-height: 1.5;
 }
 
-/* ── ARCO ── */
+
 .privacy__arco {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -289,7 +289,7 @@
   margin: 0 !important;
 }
 
-/* ── Contact box ── */
+
 .privacy__contact {
   display: flex;
   flex-direction: column;
@@ -306,7 +306,7 @@
 .privacy__contact strong { color: var(--fire-glow); }
 .privacy__contact em { color: var(--cream); font-style: normal; }
 
-/* ── Footer ── */
+
 .privacy__footer {
   display: flex;
   align-items: center;
@@ -335,7 +335,7 @@
 }
 .privacy__footer-link:hover { color: var(--fire-glow); }
 
-/* ── Responsive ── */
+
 @media (max-width: 900px) {
   .privacy__body {
     grid-template-columns: 1fr;

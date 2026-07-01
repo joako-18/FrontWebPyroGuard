@@ -31,8 +31,8 @@ export default function BrigadesPage() {
 
   const summary = useMemo(() => {
     return {
-      disponibles: brigades.filter(b => b.isActive).length, // Activas son DISPONIBLES
-      enOperacion: 0, // Mock: Se necesitan intervenciones
+      disponibles: brigades.filter(b => b.isActive).length, 
+      enOperacion: 0, 
       fueraServicio: brigades.filter(b => !b.isActive).length
     };
   }, [brigades]);
@@ -46,7 +46,7 @@ export default function BrigadesPage() {
         </button>
       </header>
 
-      {/* Tarjetas de Resumen */}
+      {}
       <div className="summary-grid">
         <div className="summary-card">
           <div className="summary-header">
@@ -78,9 +78,9 @@ export default function BrigadesPage() {
       ) : (
         <div className="brigades-grid">
           {brigades.map((brigade) => {
-            // Asumimos que "activa: true" significa que existe y está DISPONIBLE,
-            // "activa: false" significa FUERA DE SERVICIO.
-            // Para saber si está "EN OPERACIÓN" idealmente necesitamos cruzar con sus intervenciones.
+            
+            
+            
             const statusLabel = brigade.isActive ? 'DISPONIBLE' : 'FUERA DE SERVICIO';
             return (
               <div className="brigade-card" key={brigade.id}>

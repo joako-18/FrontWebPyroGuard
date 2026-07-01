@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-/* Tema oscuro ligero para que el mapa combine con el resto de la UI */
+
 .zones-map-wrapper .leaflet-tile {
   filter: brightness(0.85) contrast(1.05) saturate(0.9);
 }

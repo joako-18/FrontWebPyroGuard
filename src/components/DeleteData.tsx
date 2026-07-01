@@ -71,7 +71,7 @@ export default function DeleteData() {
 
   return (
     <div className="delete">
-      {/* Hero */}
+      {}
       <div className="delete__hero">
         <div className="delete__hero-bg" />
         <div className="container delete__hero-content">
@@ -94,7 +94,7 @@ export default function DeleteData() {
 
       <div className="container delete__body">
 
-        {/* Aviso app */}
+        {}
         <div className="delete__app-notice">
           <span className="delete__app-icon">📱</span>
           <div>
@@ -103,7 +103,7 @@ export default function DeleteData() {
           </div>
         </div>
 
-        {/* Pasos */}
+        {}
         <div className="delete__section">
           <h2 className="delete__section-title">
             <span className="delete__section-num">01</span>
@@ -126,7 +126,7 @@ export default function DeleteData() {
           </div>
         </div>
 
-        {/* Email CTA */}
+        {}
         <div className="delete__email-box">
           <div className="delete__email-header">
             <span className="delete__email-icon">✉️</span>
@@ -146,7 +146,7 @@ export default function DeleteData() {
           </div>
         </div>
 
-        {/* Datos */}
+        {}
         <div className="delete__section">
           <h2 className="delete__section-title">
             <span className="delete__section-num">02</span>
@@ -176,7 +176,7 @@ export default function DeleteData() {
           </div>
         </div>
 
-        {/* Tiempos */}
+        {}
         <div className="delete__section">
           <h2 className="delete__section-title">
             <span className="delete__section-num">03</span>
@@ -200,7 +200,7 @@ export default function DeleteData() {
           </div>
         </div>
 
-        {/* Nota final */}
+        {}
         <div className="delete__notice">
           <span className="delete__notice-icon">ℹ️</span>
           <div>

@@ -1,6 +1,6 @@
-/* Heredamos el comportamiento base de UserModal.css para el overlay y botones */
+
 .modal-large {
-  max-width: 600px !important;
+  max-width: 800px !important;
 }
 
 .modal-form textarea {
@@ -37,7 +37,7 @@
   }
 }
 
-/* === Agregar esto al final de AnnouncementModal.css existente === */
+
 
 .modal-error {
   background: rgba(220, 38, 38, 0.12);

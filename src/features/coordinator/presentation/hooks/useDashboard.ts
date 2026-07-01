@@ -4,10 +4,6 @@ import { getSeasonalityUseCase } from '../../domain/useCases/GetSeasonalityUseCa
 import type { Zone } from '../../domain/entities/Zone';
 import type { SeasonalityRecord } from '../../domain/entities/SeasonalityRecord';
 
-/**
- * Hook de presentación: orquesta la carga de zonas y estacionalidad
- * para el dashboard del coordinador. Ambas peticiones corren en paralelo.
- */
 export function useDashboard() {
   const [zones, setZones] = useState<Zone[]>([]);
   const [seasonality, setSeasonality] = useState<SeasonalityRecord[]>([]);

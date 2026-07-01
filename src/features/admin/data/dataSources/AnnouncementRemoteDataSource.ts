@@ -5,10 +5,6 @@ import type {
   DeleteAnnouncementResponseDTO,
 } from '../dto/AnnouncementDTO';
 
-/**
- * DataSource: responsable ÚNICAMENTE de saber CÓMO hablar con la API
- * para el dominio de Comunicados Oficiales.
- */
 export const AnnouncementRemoteDataSource = {
   async create(data: CreateAnnouncementRequestDTO): Promise<AnnouncementDTO> {
     return httpClient<AnnouncementDTO>('/v1/comunicados/', {

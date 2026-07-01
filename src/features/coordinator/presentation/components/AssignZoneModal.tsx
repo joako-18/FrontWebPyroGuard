@@ -17,14 +17,22 @@ export default function AssignZoneModal({ isOpen, onClose, onSave, brigadeId }: 
   const [loadingZones, setLoadingZones] = useState(true);
 
   useEffect(() => {
+    let active = true;
     if (isOpen) {
-      setLoadingZones(true);
+      Promise.resolve().then(() => {
+        if (active) setLoadingZones(true);
+      });
       const ds = new AnalyticsRemoteDataSource();
       ds.getSimpleZones()
-        .then((data) => setZones(data))
+        .then((data) => {
+          if (active) setZones(data);
+        })
         .catch((err) => console.error("Error fetching zones", err))
-        .finally(() => setLoadingZones(false));
+        .finally(() => {
+          if (active) setLoadingZones(false);
+        });
     }
+    return () => { active = false; };
   }, [isOpen]);
 
   if (!isOpen) return null;

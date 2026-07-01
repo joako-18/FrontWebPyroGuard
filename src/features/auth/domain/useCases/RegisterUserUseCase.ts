@@ -4,10 +4,6 @@ import { AuthRepositoryImpl } from '../../data/repository/AuthRepositoryImpl';
 
 const VALID_ROLES: Role[] = ['Admin', 'Coordinador', 'Analista', 'Brigadista'];
 
-/**
- * Caso de uso: contiene la lógica de negocio pura del registro de usuarios.
- * Las validaciones de formato/negocio viven aquí, no en el componente de UI.
- */
 export function createRegisterUserUseCase(repository: IAuthRepository = AuthRepositoryImpl) {
   return async function registerUserUseCase(
     name: string,

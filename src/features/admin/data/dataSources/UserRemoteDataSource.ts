@@ -6,10 +6,6 @@ import type {
   DeleteUserResponseDTO,
 } from '../dto/UserDTO';
 
-/**
- * DataSource: responsable ÚNICAMENTE de saber CÓMO hablar con la API
- * para el dominio de Gestión de Usuarios (Admin).
- */
 export const UserRemoteDataSource = {
   async getAll(): Promise<UserDTO[]> {
     return httpClient<UserDTO[]>('/v1/usuarios/', {

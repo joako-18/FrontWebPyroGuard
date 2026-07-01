@@ -3,11 +3,6 @@ import { registerUserUseCase } from '../../domain/useCases/RegisterUserUseCase';
 import type { User, Role } from '../../domain/entities/User';
 import { ApiError } from '../../../../shared/api/httpClient';
 
-/**
- * Hook de presentación: puente entre el modal de creación de usuarios
- * y la capa de dominio (useCase). El componente no sabe nada de
- * fetch, DTOs, ni mappers; solo llama a `createUser(...)`.
- */
 export function useCreateUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

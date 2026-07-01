@@ -1,4 +1,4 @@
-import type { OperationsRepository } from '../../domain/repository/OperationsRepository';
+import type { OperationsRepository, MinimalUser } from '../../domain/repository/OperationsRepository';
 import type { Brigade } from '../../domain/entities/Brigade';
 import type { Intervention } from '../../domain/entities/Intervention';
 import type { OperationsRemoteDataSource } from '../dataSources/OperationsRemoteDataSource';
@@ -11,7 +11,7 @@ export class OperationsRepositoryImpl implements OperationsRepository {
     this.remote = remote;
   }
 
-  async getBrigadistas(): Promise<any[]> {
+  async getBrigadistas(): Promise<MinimalUser[]> {
     return this.remote.getBrigadistas();
   }
 

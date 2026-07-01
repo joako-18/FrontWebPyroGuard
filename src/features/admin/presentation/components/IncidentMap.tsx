@@ -7,7 +7,7 @@ import './IncidentMap.css';
 function parseWktPoint(wkt: string): [number, number] | null {
   const match = wkt.match(/POINT\(([-\d.]+)\s+([-\d.]+)\)/);
   if (match) {
-    return [parseFloat(match[2]), parseFloat(match[1])]; // lat, lng
+    return [parseFloat(match[2]), parseFloat(match[1])]; 
   }
   return null;
 }

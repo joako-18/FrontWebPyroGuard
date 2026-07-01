@@ -38,14 +38,14 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      {/* Background elements */}
+      {}
       <div className="login__bg">
         <div className="login__bg-grid" />
         <div className="login__bg-radial" />
       </div>
       <div className="hero__embers" ref={embersRef} />
 
-      {/* Navigation Bar Header (Minimalist for Login) */}
+      {}
       <nav className="login__nav">
         <Link to="/" className="hero__logo">
           <span className="hero__logo-icon">🔥</span>

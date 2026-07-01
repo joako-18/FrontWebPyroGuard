@@ -33,11 +33,12 @@ function DrawControl({ onCreated }: { onCreated: (geojson: Record<string, unknow
 
     map.addControl(drawControl);
 
-    const handleCreated = (e: any) => {
-      const layer = e.layer;
+    const handleCreated = (e: L.LeafletEvent) => {
+      const event = e as unknown as L.DrawEvents.Created;
+      const layer = event.layer;
       onCreated(layer.toGeoJSON() as Record<string, unknown>);
-      // Opcional: limpiar capa anterior? El control maneja su propia FeatureGroup
-      // Podríamos limpiar mapas previos, pero el modal se reinicia al abrir.
+      
+      
     };
 
     map.on(L.Draw.Event.CREATED, handleCreated);

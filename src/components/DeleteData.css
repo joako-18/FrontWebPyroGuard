@@ -5,7 +5,7 @@
   font-family: var(--font-body);
 }
 
-/* ── Hero ── */
+
 .delete__hero {
   position: relative;
   padding: 6rem 0 4rem;
@@ -90,7 +90,7 @@
   max-width: 640px;
 }
 
-/* ── Body ── */
+
 .delete__body {
   padding-top: 4rem;
   padding-bottom: 6rem;
@@ -99,7 +99,7 @@
   gap: 3.5rem;
 }
 
-/* ── App notice ── */
+
 .delete__app-notice {
   display: flex;
   align-items: flex-start;
@@ -124,7 +124,7 @@
   margin: 0;
 }
 
-/* ── Section ── */
+
 .delete__section {
   display: flex;
   flex-direction: column;
@@ -156,7 +156,7 @@
   max-width: 680px;
 }
 
-/* ── Steps ── */
+
 .delete__steps {
   display: flex;
   flex-direction: column;
@@ -201,7 +201,7 @@
   margin: 0;
 }
 
-/* ── Email box ── */
+
 .delete__email-box {
   padding: 2rem 2.5rem;
   background: rgba(255,106,0,0.06);
@@ -284,7 +284,7 @@
   color: var(--white);
 }
 
-/* ── Data cards ── */
+
 .delete__data-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -345,7 +345,7 @@
   margin-top: 0.4rem;
 }
 
-/* ── Retention ── */
+
 .delete__retention {
   display: flex;
   align-items: stretch;
@@ -386,7 +386,7 @@
   flex-shrink: 0;
 }
 
-/* ── Notice ── */
+
 .delete__notice {
   display: flex;
   gap: 1rem;
@@ -417,7 +417,7 @@
 }
 .delete__notice a:hover { color: var(--white); }
 
-/* ── Footer ── */
+
 .delete__footer {
   display: flex;
   align-items: center;
@@ -446,7 +446,7 @@
 }
 .delete__footer-link:hover { color: var(--fire-glow); }
 
-/* ── Responsive ── */
+
 @media (max-width: 768px) {
   .delete__retention {
     flex-direction: column;

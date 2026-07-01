@@ -44,7 +44,7 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-          {/* Botón actualizado para navegar a la vista de Login */}
+          {}
           <Link to="/login" className="hero__nav-cta">
             Iniciar Sesión
           </Link>

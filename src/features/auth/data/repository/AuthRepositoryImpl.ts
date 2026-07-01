@@ -5,10 +5,6 @@ import { AuthRemoteDataSource } from '../dataSources/AuthRemoteDataSource';
 import { AuthMapper } from '../mappers/AuthMapper';
 import { UserMapper } from '../mappers/UserMapper';
 
-/**
- * Implementación concreta: orquesta dataSource + mapper.
- * Es lo único que conoce tanto el DTO como la Entity.
- */
 export const AuthRepositoryImpl: IAuthRepository = {
   async login(email: string, password: string): Promise<AuthSession> {
     const dto = await AuthRemoteDataSource.login({ username: email, password });

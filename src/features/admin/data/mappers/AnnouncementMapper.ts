@@ -1,16 +1,6 @@
 import type { AnnouncementDTO } from '../dto/AnnouncementDTO';
 import type { Announcement, AlertLevel } from '../../domain/entities/Announcement';
 
-/**
- * Marcador usado para empaquetar zonas y nivel de alerta dentro del
- * campo `contenido`, ya que la API no tiene columnas propias para ellos.
- * Formato guardado en `contenido`:
- *
- *   <descripción libre>
- *   ---META---
- *   zones=Z1, Z2
- *   alertLevel=preventive
- */
 const META_SEPARATOR = '---META---';
 const VALID_ALERT_LEVELS: AlertLevel[] = ['info', 'preventive', 'critical'];
 
@@ -27,7 +17,7 @@ function parseContent(raw: string): { description: string; zones: string; alertL
   const [descriptionPart, metaPart] = raw.split(META_SEPARATOR);
 
   if (!metaPart) {
-    // Comunicado antiguo o creado fuera de esta UI: no tiene metadatos embebidos.
+    
     return { description: raw.trim(), zones: '', alertLevel: 'info' };
   }
 
@@ -63,8 +53,7 @@ export const AnnouncementMapper = {
     return dtos.map(AnnouncementMapper.toDomain);
   },
 
-  /** Compone el `contenido` que se envía a la API a partir de los campos del formulario */
-  buildContentField(description: string, zones: string, alertLevel: AlertLevel): string {
+    buildContentField(description: string, zones: string, alertLevel: AlertLevel): string {
     return buildContent(description, zones, alertLevel);
   },
 };

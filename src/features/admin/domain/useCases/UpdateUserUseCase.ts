@@ -4,10 +4,6 @@ import { UserRepositoryImpl } from '../../data/repository/UserRepositoryImpl';
 
 const VALID_ROLES: Role[] = ['Admin', 'Coordinador', 'Analista', 'Brigadista'];
 
-/**
- * Caso de uso: actualizar rol y/o estado activo de un usuario.
- * El endpoint PUT /v1/usuarios/{id} solo permite cambiar estos dos campos.
- */
 export function createUpdateUserUseCase(repository: IUserRepository = UserRepositoryImpl) {
   return async function updateUserUseCase(
     id: string,

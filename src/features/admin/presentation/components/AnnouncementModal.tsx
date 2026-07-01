@@ -7,8 +7,7 @@ import './AnnouncementModal.css';
 interface AnnouncementModalProps {
   isOpen: boolean;
   onClose: () => void;
-  /** Función para crear, inyectada desde la página para compartir el mismo estado de la lista */
-  onCreate: (
+    onCreate: (
     title: string,
     description: string,
     zones: string,
@@ -17,7 +16,6 @@ interface AnnouncementModalProps {
   ) => Promise<boolean>;
 }
 
-/** Convierte un Date a formato compatible con <input type="datetime-local"> */
 function toDatetimeLocalValue(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, '0');
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(
@@ -25,7 +23,7 @@ function toDatetimeLocalValue(date: Date): string {
   )}:${pad(date.getMinutes())}`;
 }
 
-// Valor por defecto: 30 días a partir de hoy
+
 function defaultValidUntil(): string {
   const d = new Date();
   d.setDate(d.getDate() + 30);

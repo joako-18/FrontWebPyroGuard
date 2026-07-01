@@ -1,8 +1,17 @@
 import type { Brigade } from '../entities/Brigade';
 import type { Intervention } from '../entities/Intervention';
 
+export interface MinimalUser {
+  id_usuario: string;
+  nombre: string;
+  email: string;
+  rol: string;
+  activo: boolean;
+  creado_en: string;
+}
+
 export interface OperationsRepository {
-  getBrigadistas(): Promise<any[]>;
+  getBrigadistas(): Promise<MinimalUser[]>;
   getBrigades(): Promise<Brigade[]>;
   createBrigade(nombre: string, idCoordinador: string): Promise<Brigade>;
   assignMember(idBrigada: string, idBrigadista: string): Promise<boolean>;

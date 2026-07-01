@@ -25,6 +25,7 @@ export function useObservations() {
 
   useEffect(() => {
     if (!selectedZone) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setObservations([]);
       return;
     }
@@ -36,8 +37,8 @@ export function useObservations() {
         const ds = new OperationsRemoteDataSource();
         const data = await ds.getObservationsByZone(selectedZone);
         setObservations(data);
-      } catch (err: any) {
-        setError(err.message || 'Error al cargar observaciones');
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error al cargar observaciones');
       } finally {
         setIsLoading(false);
       }

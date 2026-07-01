@@ -3,9 +3,6 @@ import type { Announcement, AlertLevel } from '../../domain/entities/Announcemen
 import { AnnouncementRemoteDataSource } from '../dataSources/AnnouncementRemoteDataSource';
 import { AnnouncementMapper } from '../mappers/AnnouncementMapper';
 
-/**
- * Implementación concreta: orquesta dataSource + mapper.
- */
 export const AnnouncementRepositoryImpl: IAnnouncementRepository = {
   async create(
     title: string,

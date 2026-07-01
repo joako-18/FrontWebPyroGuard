@@ -2,9 +2,6 @@ import type { IAnnouncementRepository } from '../repository/AnnouncementReposito
 import type { Announcement } from '../entities/Announcement';
 import { AnnouncementRepositoryImpl } from '../../data/repository/AnnouncementRepositoryImpl';
 
-/**
- * Caso de uso: obtener solo los comunicados vigentes (no vencidos).
- */
 export function createGetActiveAnnouncementsUseCase(
   repository: IAnnouncementRepository = AnnouncementRepositoryImpl
 ) {

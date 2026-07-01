@@ -46,7 +46,7 @@ export default function App() {
         <Route path="/aviso-de-privacidad" element={<PrivacyPolicy />} />
         <Route path="/eliminar-datos" element={<DeleteData />} />
         
-        {/* Rutas protegidas para Admin */}
+        {}
         <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="usuarios" element={<UsersPage />} />
@@ -55,7 +55,7 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* Rutas protegidas para Coordinador */}
+        {}
         <Route element={<ProtectedRoute allowedRoles={['Coordinador']} />}>
           <Route path="/coordinator" element={<CoordinatorLayout />}>
             <Route path="dashboard" element={<DashboardPage />} />
@@ -64,7 +64,7 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* Ruta para 404 y catch-all */}
+        {}
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

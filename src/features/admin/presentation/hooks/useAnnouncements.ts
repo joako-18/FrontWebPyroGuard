@@ -8,10 +8,6 @@ import { ApiError } from '../../../../shared/api/httpClient';
 
 type ViewMode = 'active' | 'history';
 
-/**
- * Hook de presentación: orquesta listar (activos/historial), crear y eliminar
- * comunicados. AnnouncementsPage.tsx solo consume este hook.
- */
 export function useAnnouncements(initialMode: ViewMode = 'active') {
   const [viewMode, setViewMode] = useState<ViewMode>(initialMode);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -32,9 +28,9 @@ export function useAnnouncements(initialMode: ViewMode = 'active') {
     }
   }
 
-  // Carga inicial y recarga cuando cambia el modo de vista (activos/historial).
-  // Se hace inline dentro del efecto (no llamando a fetchAnnouncements) para
-  // cumplir con la regla react-hooks/set-state-in-effect.
+  
+  
+  
   useEffect(() => {
     let isMounted = true;
 
@@ -71,8 +67,8 @@ export function useAnnouncements(initialMode: ViewMode = 'active') {
     setError(null);
     try {
       const created = await createAnnouncementUseCase(title, description, zones, alertLevel, validUntil);
-      // Solo lo insertamos en la lista visible si coincide con el modo actual
-      // (si estamos viendo "activos" y el nuevo comunicado está vigente, aparece de inmediato).
+      
+      
       setAnnouncements((prev) => [created, ...prev]);
       return true;
     } catch (err) {

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { CitizenReport } from '../../domain/entities/CitizenReport';
 import { CitizenReportRepositoryImpl } from '../../data/repository/CitizenReportRepositoryImpl';
@@ -34,8 +33,9 @@ export function useCitizenReports() {
 
   useEffect(() => {
     isMounted.current = true;
-    fetchReports();
+    const timer = setTimeout(fetchReports, 0);
     return () => {
+      clearTimeout(timer);
       isMounted.current = false;
     };
   }, [fetchReports]);

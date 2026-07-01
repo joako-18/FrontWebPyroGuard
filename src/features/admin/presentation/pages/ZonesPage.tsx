@@ -39,7 +39,7 @@ export default function ZonesPage() {
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Error al crear zona';
       setSaveError(message);
-      throw err; // para que el modal capture el rechazo
+      throw err; 
     }
   };
 

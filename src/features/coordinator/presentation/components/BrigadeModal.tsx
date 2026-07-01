@@ -19,7 +19,7 @@ export default function BrigadeModal({ isOpen, onClose, onSave }: BrigadeModalPr
     e.preventDefault();
     setSaving(true);
     try {
-      let coordinatorId = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; // fallback
+      let coordinatorId = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; 
       if (accessToken) {
         try {
           const payload = JSON.parse(atob(accessToken.split('.')[1]));

@@ -1,17 +1,14 @@
-import { useMemo } from 'react'
 import './CTA.css'
+const embers = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}%`,
+  animationDelay: `${Math.random() * 6}s`,
+  animationDuration: `${3 + Math.random() * 5}s`,
+  width: `${2 + Math.random() * 3}px`,
+  height: `${2 + Math.random() * 3}px`,
+}));
 
 export default function CTA() {
-  const embers = useMemo(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 6}s`,
-      animationDuration: `${3 + Math.random() * 5}s`,
-      width: `${2 + Math.random() * 3}px`,
-      height: `${2 + Math.random() * 3}px`,
-    })), []
-  )
 
   return (
     <section id="contacto" className="cta">

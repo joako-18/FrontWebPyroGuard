@@ -1,4 +1,4 @@
-// IncidentDTO.ts
+
 export interface IncidentDTO {
   id: string;
   fecha: string;

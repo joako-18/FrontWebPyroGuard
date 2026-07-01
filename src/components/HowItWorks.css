@@ -14,7 +14,7 @@
 
 .hiw__header { max-width: 640px; margin-bottom: 4rem; }
 
-/* ── Pipeline ── */
+
 .hiw__pipeline {
   display: flex;
   flex-direction: column;
@@ -133,7 +133,7 @@
   border-radius: 2px;
 }
 
-/* ── Risk Levels ── */
+
 .hiw__risk {
   padding: 3rem;
   background: rgba(45, 31, 14, 0.5);

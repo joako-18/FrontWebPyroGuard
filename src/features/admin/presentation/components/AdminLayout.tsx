@@ -24,7 +24,7 @@ export default function AdminLayout() {
   
   return (
     <div className="admin-layout">
-      {/* Sidebar Izquierdo */}
+      {}
       <aside className="admin-sidebar">
         <div className="sidebar-brand">
           <div className="brand-logo-box"></div>
@@ -69,7 +69,7 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      {/* Contenedor Principal */}
+      {}
       <main className="admin-main">
         <Outlet />
       </main>

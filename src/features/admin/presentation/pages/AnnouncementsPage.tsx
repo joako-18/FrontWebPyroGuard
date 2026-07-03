@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Edit2, Trash2 } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
 import AnnouncementModal from '../components/AnnouncementModal';
 import { useAnnouncements } from '../hooks/useAnnouncements';
 import type { Announcement } from '../../domain/entities/Announcement';
@@ -62,7 +63,30 @@ export default function AnnouncementsPage() {
 
       {error && <div className="page-error">{error}</div>}
 
-      {isLoading && <p className="page-loading">Cargando comunicados...</p>}
+      {isLoading && (
+        <div className="announcements-list">
+          {[1, 2, 3].map((i) => (
+            <div className="announcement-card" key={i}>
+              <div className="card-header-top">
+                <div className="title-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Skeleton circle width={12} height={12} />
+                  <Skeleton width={150} height={20} />
+                </div>
+              </div>
+              <div style={{ marginTop: '12px', marginBottom: '12px' }}>
+                <Skeleton count={2} />
+              </div>
+              <div className="card-footer" style={{ borderTop: 'none', paddingTop: 0 }}>
+                <div className="card-meta" style={{ display: 'flex', gap: '12px', width: '100%' }}>
+                  <Skeleton width={80} />
+                  <Skeleton width={100} />
+                  <Skeleton width={120} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {!isLoading && announcements.length === 0 && (
         <p className="page-empty">No hay comunicados {viewMode === 'active' ? 'vigentes' : 'en el historial'}.</p>

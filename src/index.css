@@ -154,3 +154,9 @@ section {
   filter: blur(8px);
   opacity: 0.5;
 }
+
+/* Skeleton Dark Theme Overrides */
+.react-loading-skeleton {
+  --base-color: var(--ash) !important;
+  --highlight-color: var(--bark) !important;
+}

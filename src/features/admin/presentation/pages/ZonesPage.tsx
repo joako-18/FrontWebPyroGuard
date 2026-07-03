@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useZonesData } from '../hooks/useZonesData';
 import IncidentMap from '../components/IncidentMap';
 import ThresholdForm from '../components/ThresholdForm';
@@ -46,7 +47,33 @@ export default function ZonesPage() {
   if (isLoading) {
     return (
       <div className="zones-page">
-        <div className="loading-state">Cargando datos de zonas...</div>
+        <header className="page-header">
+          <Skeleton width={300} height={40} />
+          <div style={{ marginTop: '12px' }}>
+            <Skeleton width={400} />
+          </div>
+        </header>
+        <div className="zones-grid">
+          <div className="zones-column-main">
+            <section className="zones-card map-card">
+              <Skeleton width={200} height={24} style={{ marginBottom: '16px' }} />
+              <Skeleton height={400} borderRadius={12} />
+            </section>
+          </div>
+          <div className="zones-column-side">
+            <section className="zones-card action-card">
+              <Skeleton width={150} height={24} style={{ marginBottom: '16px' }} />
+              <Skeleton width={80} height={40} style={{ marginBottom: '8px' }} />
+              <Skeleton width={120} height={20} style={{ marginBottom: '24px' }} />
+              <Skeleton height={40} borderRadius={8} />
+            </section>
+            <section className="zones-card threshold-card">
+              <Skeleton width={180} height={24} style={{ marginBottom: '16px' }} />
+              <Skeleton count={3} height={60} style={{ marginBottom: '16px' }} />
+              <Skeleton height={40} borderRadius={8} width={120} />
+            </section>
+          </div>
+        </div>
       </div>
     );
   }

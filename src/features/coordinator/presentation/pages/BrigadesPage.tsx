@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { CheckCircle2, Activity, AlertTriangle, UserPlus } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
 import BrigadeModal from '../components/BrigadeModal';
 import AssignZoneModal from '../components/AssignZoneModal';
 import AssignMemberModal from '../components/AssignMemberModal';
@@ -72,7 +73,25 @@ export default function BrigadesPage() {
       </div>
 
       {isLoading ? (
-        <div className="loading-state">Cargando brigadas...</div>
+        <div className="brigades-grid">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div className="brigade-card" key={i}>
+              <div className="brigade-header">
+                <Skeleton width={80} />
+                <Skeleton width={100} borderRadius={12} />
+              </div>
+              <h3 className="brigade-name" style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <Skeleton width={150} height={24} />
+              </h3>
+              <div className="brigade-meta-actions" style={{ marginBottom: '16px' }}>
+                <Skeleton width={140} height={32} />
+              </div>
+              <div className="brigade-action">
+                <Skeleton height={42} />
+              </div>
+            </div>
+          ))}
+        </div>
       ) : error ? (
         <div className="error-state">Error: {error}</div>
       ) : (

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, Edit2, Trash2 } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
 import UserModal from '../components/UserModal';
 import { useUsers } from '../hooks/useUsers';
 import type { AdminUser } from '../../domain/entities/AdminUser';
@@ -99,9 +100,27 @@ export default function UsersPage() {
           </thead>
           <tbody>
             {isLoading && (
-              <tr>
-                <td colSpan={5}>Cargando usuarios...</td>
-              </tr>
+              <>
+                {[1, 2, 3, 4].map((i) => (
+                  <tr key={i}>
+                    <td>
+                      <div className="user-info" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <Skeleton circle width={32} height={32} />
+                        <Skeleton width={120} />
+                      </div>
+                    </td>
+                    <td><Skeleton width={180} /></td>
+                    <td><Skeleton width={100} /></td>
+                    <td><Skeleton width={40} height={20} borderRadius={10} /></td>
+                    <td>
+                      <div className="action-buttons" style={{ display: 'flex', gap: '8px' }}>
+                        <Skeleton width={32} height={32} borderRadius={6} />
+                        <Skeleton width={32} height={32} borderRadius={6} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </>
             )}
 
             {!isLoading && filteredUsers.length === 0 && (

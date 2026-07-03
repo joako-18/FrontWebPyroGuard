@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { X } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
 import { AnalyticsRemoteDataSource } from '../../data/dataSources/AnalyticsRemoteDataSource';
 
 interface AssignZoneModalProps {
@@ -65,7 +66,7 @@ export default function AssignZoneModal({ isOpen, onClose, onSave, brigadeId }: 
           <div className="form-group">
             <label>Selecciona la Zona</label>
             {loadingZones ? (
-              <div style={{ color: 'var(--text-muted)' }}>Cargando zonas...</div>
+              <Skeleton height={42} />
             ) : (
               <select 
                 value={zoneId}

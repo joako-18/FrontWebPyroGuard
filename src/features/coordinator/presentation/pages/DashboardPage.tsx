@@ -1,4 +1,5 @@
 import { useDashboard } from '../hooks/useDashboard.ts';
+import Skeleton from 'react-loading-skeleton';
 import ZonesMap from '../components/ZonesMap';
 import SeasonalityChart from '../components/SeasonalityChart';
 import './DashboardPage.css';
@@ -21,7 +22,24 @@ export default function DashboardPage() {
 
       {error && <div className="page-error">{error}</div>}
 
-      {isLoading && <p className="page-loading">Cargando información del dashboard...</p>}
+      {isLoading && (
+        <>
+          <div className="dashboard-summary-grid">
+            {[1, 2, 3].map(i => (
+              <div className="summary-card" key={i}>
+                <div className="summary-header">
+                  <Skeleton width={150} />
+                </div>
+                <div className="summary-value"><Skeleton width={80} /></div>
+              </div>
+            ))}
+          </div>
+          <section className="dashboard-section" style={{ marginTop: '32px' }}>
+            <Skeleton width={200} height={30} style={{ marginBottom: '16px' }} />
+            <Skeleton height={400} borderRadius={12} />
+          </section>
+        </>
+      )}
 
       {!isLoading && !error && (
         <>

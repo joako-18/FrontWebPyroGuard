@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useCitizenReports } from '../hooks/useCitizenReports';
 import { useObservations } from '../hooks/useObservations';
 import './ReportsPage.css';
@@ -67,9 +68,17 @@ export default function ReportsPage() {
             </thead>
             <tbody>
               {loadingReports && (
-                <tr>
-                  <td colSpan={5} className="loading-cell">Cargando reportes...</td>
-                </tr>
+                <>
+                  {[1, 2, 3].map(i => (
+                    <tr key={i}>
+                      <td><Skeleton width={150} /></td>
+                      <td><Skeleton width={80} /></td>
+                      <td><Skeleton width={60} borderRadius={10} height={20} /></td>
+                      <td><Skeleton width={100} /></td>
+                      <td><Skeleton width={40} /></td>
+                    </tr>
+                  ))}
+                </>
               )}
 
               {!loadingReports && reports.length === 0 && (
@@ -158,9 +167,17 @@ export default function ReportsPage() {
               )}
               
               {selectedZone && loadingObs && (
-                <tr>
-                  <td colSpan={5} className="loading-cell">Cargando observaciones...</td>
-                </tr>
+                <>
+                  {[1, 2, 3].map(i => (
+                    <tr key={i}>
+                      <td><Skeleton width={120} /></td>
+                      <td><Skeleton width={120} /></td>
+                      <td><Skeleton width={180} /></td>
+                      <td><Skeleton width={80} /></td>
+                      <td><Skeleton width={100} /></td>
+                    </tr>
+                  ))}
+                </>
               )}
 
               {selectedZone && !loadingObs && observations.length === 0 && (

@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { X } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
 import { useBrigades } from '../hooks/useBrigades';
 import type { MinimalUser } from '../../domain/repository/OperationsRepository';
 
@@ -65,7 +66,7 @@ export default function AssignMemberModal({ isOpen, onClose, onSave, brigadeId }
           <div className="form-group">
             <label>Selecciona un Brigadista</label>
             {loadingUsers ? (
-              <div style={{ color: 'var(--text-muted)' }}>Cargando brigadistas...</div>
+              <Skeleton height={42} />
             ) : (
               <select 
                 value={memberId} 

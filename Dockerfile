@@ -20,5 +20,3 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # La imagen chainguard expone 8080 por defecto
 EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]

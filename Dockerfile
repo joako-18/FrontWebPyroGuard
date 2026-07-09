@@ -11,7 +11,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Generar un archivo de configuración de Nginx garantizado
+# Generar un archivo de configuración de Nginx garantizado en una carpeta temporal con permisos
 RUN echo "events {} \
 http { \
     include /etc/nginx/mime.types; \
@@ -23,15 +23,14 @@ http { \
             try_files \$uri \$uri/ /index.html; \
         } \
     } \
-}" > /app/nginx.conf
+}" > /tmp/nginx.conf
 
-# Etapa 2: Producción (Servidor Nginx Seguro)
-# Usamos la imagen de producción de Chainguard (Distroless, sin terminal, 0 CVEs)
+# Etapa 2: Producción (Servidor Nginx Seguro sin vulnerabilidades)
 FROM cgr.dev/chainguard/nginx:latest
 
 # Copiar el build y la configuración
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /tmp/nginx.conf /etc/nginx/nginx.conf
 
 # La imagen chainguard expone 8080 por defecto
 EXPOSE 8080

@@ -26,8 +26,8 @@ export class OperationsRepositoryImpl implements OperationsRepository {
   }
 
   async assignMember(idBrigada: string, idBrigadista: string): Promise<boolean> {
-    const response = await this.remote.assignMember(idBrigada, { id_brigadista: idBrigadista });
-    return response.status === 'success';
+    await this.remote.assignMember(idBrigada, { id_brigadista: idBrigadista });
+    return true; // httpClient throws on error, so if we reach here it was successful
   }
 
   async createIntervention(idBrigada: string, idZona: string, observaciones: string): Promise<Intervention> {

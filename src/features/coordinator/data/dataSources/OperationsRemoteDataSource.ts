@@ -19,19 +19,19 @@ export class OperationsRemoteDataSource {
   }
 
   async getBrigades(): Promise<BrigadeDTO[]> {
-    return httpClient<BrigadeDTO[]>('/operaciones/brigadas', { baseUrlOverride: API_BASE_URL });
+    return httpClient<BrigadeDTO[]>('/brigadas', { baseUrlOverride: API_BASE_URL });
   }
 
   async createBrigade(request: CreateBrigadeRequestDTO): Promise<BrigadeDTO> {
-    return httpClient<BrigadeDTO>('/operaciones/brigadas', {
+    return httpClient<BrigadeDTO>('/brigadas', {
       method: 'POST',
       body: JSON.stringify(request),
       baseUrlOverride: API_BASE_URL,
     });
   }
 
-  async assignMember(id_brigada: string, request: AssignMemberRequestDTO): Promise<{status: string, message: string}> {
-    return httpClient<{status: string, message: string}>(`/operaciones/brigadas/${id_brigada}/miembros`, {
+  async assignMember(id_brigada: string, request: AssignMemberRequestDTO): Promise<string> {
+    return httpClient<string>(`/brigadas/${id_brigada}/miembros`, {
       method: 'POST',
       body: JSON.stringify(request),
       baseUrlOverride: API_BASE_URL,

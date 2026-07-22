@@ -3,14 +3,15 @@ import type { AuthSession } from '../../domain/entities/AuthSession';
 
 export const AuthMapper = {
   toDomain(dto: LoginResponseDTO): AuthSession {
+    const userRole = dto.rol || dto.usuario?.rol || '';
     return {
       accessToken: dto.access_token,
       tokenType: dto.token_type,
-      user: dto.usuario ? {
-        id: dto.usuario.id_usuario,
-        name: dto.usuario.nombre,
-        role: dto.usuario.rol,
-      } : undefined,
+      user: {
+        id: dto.usuario?.id_usuario || '',
+        name: dto.usuario?.nombre || '',
+        role: userRole,
+      },
     };
   },
 };

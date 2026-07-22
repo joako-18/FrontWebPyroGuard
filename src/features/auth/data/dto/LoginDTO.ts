@@ -7,6 +7,7 @@ export interface LoginRequestDTO {
 export interface LoginResponseDTO {
   access_token: string;
   token_type: string;
+  rol?: string;
   usuario?: {
     id_usuario: string;
     nombre: string;

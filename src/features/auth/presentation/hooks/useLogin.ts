@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUseCase } from '../../domain/useCases/LoginUseCase';
 import { useAuthStore } from '../store/authStore';
-import { ApiError, httpClient } from '../../../../shared/api/httpClient';
+import { ApiError } from '../../../../shared/api/httpClient';
 
 import type { Role } from '../../domain/entities/User';
 
@@ -40,29 +40,19 @@ export function useLogin() {
       let role: Role = 'Admin';
       let userName: string = email.split('@')[0];
 
-      if (session.user) {
-        role = (session.user.role as Role) || 'Admin';
+      if (session.user && session.user.role) {
+        role = (session.user.role as Role);
         userName = session.user.name || userName;
       } else {
-        
         const payload = parseJwt(session.accessToken);
-        const userId = payload?.sub;
-        if (userId) {
-          try {
-            const userData = await httpClient<{rol?: string, role?: string, nombre?: string, name?: string}>(`/v1/usuarios/${userId}`, {
-              headers: { Authorization: `Bearer ${session.accessToken}` }
-            });
-            role = (userData.rol || userData.role || 'Admin') as Role;
-            userName = userData.nombre || userData.name || userName;
-          } catch {
-            if (email.toLowerCase().includes('coord')) role = 'Coordinador';
-          }
-        } else {
-          if (email.toLowerCase().includes('coord')) role = 'Coordinador';
+        if (payload?.roles && payload.roles.length > 0) {
+          role = payload.roles[0] as Role;
+        } else if (payload?.sub) {
+          // Fallback if needed
         }
       }
       
-      
+      // Normalize role name
       if (typeof role === 'string') {
         const lowerRole = role.toLowerCase();
         if (lowerRole.includes('admin')) role = 'Admin';

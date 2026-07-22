@@ -7,7 +7,7 @@ import { UserMapper } from '../mappers/UserMapper';
 
 export const AuthRepositoryImpl: IAuthRepository = {
   async login(email: string, password: string): Promise<AuthSession> {
-    const dto = await AuthRemoteDataSource.login({ username: email, password });
+    const dto = await AuthRemoteDataSource.login({ email, password });
     return AuthMapper.toDomain(dto);
   },
 

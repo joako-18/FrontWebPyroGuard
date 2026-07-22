@@ -5,18 +5,9 @@ import type { RegisterRequestDTO, RegisterResponseDTO } from '../dto/RegisterDTO
 
 export const AuthRemoteDataSource = {
   async login(credentials: LoginRequestDTO): Promise<LoginResponseDTO> {
-    
-    
-    const body = new URLSearchParams();
-    body.set('username', credentials.username);
-    body.set('password', credentials.password);
-
     return httpClient<LoginResponseDTO>('/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: body.toString(),
+      body: JSON.stringify(credentials),
       skipAuth: true, 
       baseUrlOverride: ENV.API_BASE_URL_LOGIN,
     });

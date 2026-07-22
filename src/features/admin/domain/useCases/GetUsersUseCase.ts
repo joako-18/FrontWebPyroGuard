@@ -3,8 +3,8 @@ import type { AdminUser } from '../entities/AdminUser';
 import { UserRepositoryImpl } from '../../data/repository/UserRepositoryImpl';
 
 export function createGetUsersUseCase(repository: IUserRepository = UserRepositoryImpl) {
-  return async function getUsersUseCase(): Promise<AdminUser[]> {
-    return repository.getAll();
+  return async function getUsersUseCase(role?: string): Promise<AdminUser[]> {
+    return repository.getAll(role);
   };
 }
 

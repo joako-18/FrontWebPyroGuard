@@ -5,23 +5,23 @@ import { deleteUserUseCase } from '../../domain/useCases/DeleteUserUseCase';
 import type { AdminUser, Role } from '../../domain/entities/AdminUser';
 import { ApiError } from '../../../../shared/api/httpClient';
 
-export function useUsers() {
+export function useUsers(initialRoleFilter?: string) {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchUsers = useCallback(async () => {
+  const fetchUsers = useCallback(async (role?: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await getUsersUseCase();
+      const data = await getUsersUseCase(role ?? initialRoleFilter);
       setUsers(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudo cargar la lista de usuarios.');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [initialRoleFilter]);
 
   
   
@@ -34,7 +34,7 @@ export function useUsers() {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await getUsersUseCase();
+        const data = await getUsersUseCase(initialRoleFilter);
         if (isMounted) setUsers(data);
       } catch (err) {
         if (isMounted) {

@@ -5,11 +5,17 @@ import type {
   UpdateUserResponseDTO,
   DeleteUserResponseDTO,
 } from '../dto/UserDTO';
+import { ENV } from '../../../../shared/config/env';
 
 export const UserRemoteDataSource = {
-  async getAll(): Promise<UserDTO[]> {
-    return httpClient<UserDTO[]>('/v1/usuarios/', {
+  async getAll(role?: string): Promise<UserDTO[]> {
+    const url = role ? `/internal/users?rol=${role}` : '/internal/users';
+    return httpClient<UserDTO[]>(url, {
       method: 'GET',
+      headers: {
+        'x-api-key': ENV.API_KEY_INTERNAL,
+      },
+      baseUrlOverride: 'https://pyroguard.inode.cloud',
     });
   },
 

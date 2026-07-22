@@ -4,8 +4,8 @@ import { UserRemoteDataSource } from '../dataSources/UserRemoteDataSource';
 import { AdminUserMapper } from '../mappers/AdminUserMapper';
 
 export const UserRepositoryImpl: IUserRepository = {
-  async getAll(): Promise<AdminUser[]> {
-    const dtos = await UserRemoteDataSource.getAll();
+  async getAll(role?: string): Promise<AdminUser[]> {
+    const dtos = await UserRemoteDataSource.getAll(role);
     return AdminUserMapper.toDomainList(dtos);
   },
 

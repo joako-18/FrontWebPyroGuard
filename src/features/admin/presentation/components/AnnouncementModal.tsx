@@ -94,10 +94,25 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
           )}
 
           <div className="form-group">
-            <label>Título del comunicado</label>
+            <label>Nivel de Alerta</label>
+            <select
+              value={alertLevel}
+              onChange={(e) => setAlertLevel(e.target.value as AlertLevel)}
+              disabled={isSubmitting}
+              required
+            >
+              <option value="" disabled>Selecciona el nivel</option>
+              <option value="info">Informativo</option>
+              <option value="preventive">Preventivo</option>
+              <option value="critical">Crítico (Emergencia)</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Título del comunicado {alertLevel === 'critical' && '(Ignorado en emergencias)'}</label>
             <input
               type="text"
-              placeholder="Ej. Alerta preventiva: altas temperaturas"
+              placeholder={alertLevel === 'critical' ? "Autogenerado por el sistema" : "Ej. Alerta preventiva: altas temperaturas"}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               disabled={isSubmitting}
@@ -106,7 +121,7 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
           </div>
 
           <div className="form-group">
-            <label>Descripción detallada</label>
+            <label>{alertLevel === 'critical' ? 'Mensaje Adicional de Emergencia' : 'Descripción detallada'}</label>
             <textarea
               rows={4}
               placeholder="Escribe el cuerpo del comunicado aquí..."
@@ -118,31 +133,16 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
           </div>
 
           <div className="form-row">
-            <div className="form-group half-width">
-              <label>Zonas Afectadas</label>
+            <div className="form-group full-width">
+              <label>{alertLevel === 'critical' ? 'ID de la Zona (Obligatorio para emergencias)' : 'Zonas Afectadas (Opcional)'}</label>
               <input
                 type="text"
-                placeholder="Ej. Z1, Z2, Z4"
+                placeholder={alertLevel === 'critical' ? "Ej. 3fa85f64-5717-4562..." : "Ej. Z1, Z2, Z4"}
                 value={zones}
                 onChange={(e) => setZones(e.target.value)}
                 disabled={isSubmitting}
-                required
+                required={alertLevel === 'critical'}
               />
-            </div>
-
-            <div className="form-group half-width">
-              <label>Nivel de Alerta</label>
-              <select
-                value={alertLevel}
-                onChange={(e) => setAlertLevel(e.target.value as AlertLevel)}
-                disabled={isSubmitting}
-                required
-              >
-                <option value="" disabled>Selecciona el nivel</option>
-                <option value="info">Informativo</option>
-                <option value="preventive">Preventivo</option>
-                <option value="critical">Crítico</option>
-              </select>
             </div>
           </div>
 

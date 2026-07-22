@@ -61,7 +61,15 @@ export default function AnnouncementsPage() {
         </div>
       </header>
 
-      {error && <div className="page-error">{error}</div>}
+      {error && (
+        <div className="glass-card error-card" style={{ padding: '20px', textAlign: 'center', color: '#ff4d4f', margin: '20px 0' }}>
+          <h3>No se pudieron cargar los comunicados</h3>
+          <p>Ocurrió un error de conexión con el servidor. {error}</p>
+          <button className="btn-primary" onClick={() => window.location.reload()} style={{ marginTop: '15px' }}>
+            Reintentar
+          </button>
+        </div>
+      )}
 
       {isLoading && (
         <div className="announcements-list">
@@ -88,8 +96,11 @@ export default function AnnouncementsPage() {
         </div>
       )}
 
-      {!isLoading && announcements.length === 0 && (
-        <p className="page-empty">No hay comunicados {viewMode === 'active' ? 'vigentes' : 'en el historial'}.</p>
+      {!isLoading && !error && announcements.length === 0 && (
+        <div className="glass-card empty-card" style={{ padding: '40px', textAlign: 'center', opacity: 0.8, margin: '20px 0' }}>
+          <div style={{ fontSize: '40px', marginBottom: '10px' }}>📭</div>
+          <p style={{ fontSize: '1.1rem' }}>No hay comunicados {viewMode === 'active' ? 'vigentes' : 'en el historial'} en este momento.</p>
+        </div>
       )}
 
       <div className="announcements-list">

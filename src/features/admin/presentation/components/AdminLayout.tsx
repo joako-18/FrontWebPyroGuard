@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import { useAuthStore } from '../../../auth/presentation/store/authStore';
+import { useFCM } from '../../../../shared/hooks/useFCM';
 import './AdminLayout.css';
 
 export default function AdminLayout() {
@@ -8,6 +9,8 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const { userName, role, logout } = useAuthStore();
   
+  useFCM(); // Activar notificaciones para el admin
+
   const handleLogout = () => {
     logout();
     navigate('/login');

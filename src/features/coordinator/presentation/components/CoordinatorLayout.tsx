@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import { useAuthStore } from '../../../auth/presentation/store/authStore';
+import { useFCM } from '../../../../shared/hooks/useFCM';
 import './CoordinatorLayout.css';
 
 export default function CoordinatorLayout() {
@@ -8,6 +9,8 @@ export default function CoordinatorLayout() {
   const navigate = useNavigate();
   const { userName, role, logout } = useAuthStore();
   
+  useFCM();
+
   const handleLogout = () => {
     logout();
     navigate('/login');

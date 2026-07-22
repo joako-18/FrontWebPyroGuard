@@ -37,10 +37,14 @@ function Home() {
   )
 }
 
+import { Toaster } from 'react-hot-toast';
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <>
+      <Toaster position="top-right" />
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/aviso-de-privacidad" element={<PrivacyPolicy />} />
@@ -69,5 +73,6 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </>
   )
 }

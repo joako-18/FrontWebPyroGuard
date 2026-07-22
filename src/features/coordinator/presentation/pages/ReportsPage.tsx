@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useCitizenReports } from '../hooks/useCitizenReports';
 import { useObservations } from '../hooks/useObservations';
+import { useTechnicalReports } from '../hooks/useTechnicalReports';
 import './ReportsPage.css';
 
 const getStatusClass = (estado: string) => {
@@ -25,6 +26,7 @@ const getStatusLabel = (estado: string) => {
 export default function ReportsPage() {
   const { reports, isLoading: loadingReports, error: errorReports, refetch } = useCitizenReports();
   const { zones, selectedZone, setSelectedZone, observations, isLoading: loadingObs, error: errorObs } = useObservations();
+  const { reports: techReports, isLoading: loadingTech, isRequesting: requestingTech, error: errorTech, requestReport } = useTechnicalReports(selectedZone);
   
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -197,6 +199,111 @@ export default function ReportsPage() {
                       {new Date(obs.creado_en).toLocaleDateString('es-MX', {
                         year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
                       })}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Reportes Técnicos */}
+      <section className="reports-section" style={{ marginTop: '3rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <h2 className="section-subtitle">Reportes Técnicos de Riesgo</h2>
+          {selectedZone && (
+            <button 
+              className="btn-primary"
+              onClick={requestReport}
+              disabled={requestingTech}
+            >
+              {requestingTech ? 'Solicitando...' : 'Solicitar Nuevo Reporte'}
+            </button>
+          )}
+        </div>
+
+        {errorTech && (
+          <div className="page-error">
+            <p>{errorTech}</p>
+          </div>
+        )}
+
+        <div className="table-container glass-card">
+          <table className="reports-table">
+            <thead>
+              <tr>
+                <th>Coordinador</th>
+                <th>Estado</th>
+                <th>Nivel de Riesgo</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              {!selectedZone && (
+                <tr>
+                  <td colSpan={5} className="empty-cell">Selecciona una zona para ver los reportes técnicos.</td>
+                </tr>
+              )}
+              
+              {selectedZone && loadingTech && (
+                <>
+                  {[1, 2].map(i => (
+                    <tr key={i}>
+                      <td><Skeleton width={120} /></td>
+                      <td><Skeleton width={80} borderRadius={10} height={20} /></td>
+                      <td><Skeleton width={80} /></td>
+                      <td><Skeleton width={100} /></td>
+                      <td><Skeleton width={80} /></td>
+                    </tr>
+                  ))}
+                </>
+              )}
+
+              {selectedZone && !loadingTech && techReports.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="empty-cell">No se han generado reportes técnicos para esta zona.</td>
+                </tr>
+              )}
+
+              {selectedZone && !loadingTech &&
+                techReports.map((tech) => (
+                  <tr key={tech.id_reporte}>
+                    <td>{tech.coordinador_nombre || 'Sistema'}</td>
+                    <td>
+                      <span className={`status-badge ${tech.estado === 'Completado' ? 'status-attended' : tech.estado === 'Procesando' ? 'status-pending' : 'status-false'}`}>
+                        {tech.estado}
+                      </span>
+                    </td>
+                    <td>
+                      <span style={{ 
+                        color: tech.nivel_riesgo_registrado === 'Critico' ? '#ff4b1f' : 
+                               tech.nivel_riesgo_registrado === 'Alto' ? '#ff9068' : 
+                               tech.nivel_riesgo_registrado === 'Medio' ? '#f5d020' : 
+                               'var(--text-color)' 
+                      }}>
+                        {tech.nivel_riesgo_registrado || 'N/A'}
+                      </span>
+                    </td>
+                    <td>
+                      {new Date(tech.creado_en).toLocaleDateString('es-MX', {
+                        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+                      })}
+                    </td>
+                    <td>
+                      {tech.archivo_pdf_path ? (
+                        <a 
+                          href={tech.archivo_pdf_path} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="photo-link"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          Ver PDF
+                        </a>
+                      ) : (
+                        <span className="no-photo">—</span>
+                      )}
                     </td>
                   </tr>
                 ))}

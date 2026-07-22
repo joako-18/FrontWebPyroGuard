@@ -1,4 +1,5 @@
 export interface CreateZoneRequest {
+  id_zona?: string;
   nombre: string;
   geojson_polygon: {
     type: string;

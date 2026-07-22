@@ -24,6 +24,7 @@ export class ZoneRepositoryImpl implements ZoneRepository {
     const geometry = geojsonPolygon.geometry as { type: string; coordinates: number[][][] };
 
     const dto = await this.remote.createZone({
+      id_zona: crypto.randomUUID(),
       nombre,
       geojson_polygon: geometry,
     });

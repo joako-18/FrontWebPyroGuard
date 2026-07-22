@@ -23,7 +23,7 @@ function DrawControl({ onCreated }: { onCreated: (geojson: Record<string, unknow
         polyline: false,
         polygon: {
           allowIntersection: false,
-          showArea: true,
+          showArea: false,
         },
       },
       edit: {

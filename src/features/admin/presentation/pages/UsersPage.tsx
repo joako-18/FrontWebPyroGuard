@@ -71,7 +71,7 @@ export default function UsersPage() {
         <div className="search-wrapper">
           <input
             type="text"
-            className="search-input"
+            className="search-input glass-input"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por nombre o correo..."
@@ -87,7 +87,7 @@ export default function UsersPage() {
 
       {error && <div className="page-error">{error}</div>}
 
-      <div className="table-container">
+      <div className="table-container glass-card">
         <table className="users-table">
           <thead>
             <tr>

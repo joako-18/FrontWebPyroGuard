@@ -19,11 +19,13 @@ export class ZoneRepositoryImpl implements ZoneRepository {
     nombre: string,
     geojsonPolygon: Record<string, unknown>
   ): Promise<Zone> {
+    // geojsonPolygon comes from Leaflet as a GeoJSON Feature
+    // We only need the geometry part for the API
+    const geometry = geojsonPolygon.geometry as { type: string; coordinates: number[][][] };
+
     const dto = await this.remote.createZone({
-      id_zona: crypto.randomUUID(),
       nombre,
-      area_hectareas: 0,
-      geojson: JSON.stringify(geojsonPolygon),
+      geojson_polygon: geometry,
     });
     return mapZone(dto);
   }

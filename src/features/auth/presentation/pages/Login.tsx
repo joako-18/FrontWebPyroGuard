@@ -37,15 +37,20 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
-      {}
+    <div className="login-page glass-bg-container">
+      {/* Ambient Glassmorphism Orbs */}
+      <div className="ambient-orb ambient-orb--fire" />
+      <div className="ambient-orb ambient-orb--ember" />
+      <div className="ambient-orb ambient-orb--ash" />
+      
+      {/* Fondos */}
       <div className="login__bg">
         <div className="login__bg-grid" />
         <div className="login__bg-radial" />
       </div>
       <div className="hero__embers" ref={embersRef} />
 
-      {}
+      {/* Navegación */}
       <nav className="login__nav">
         <Link to="/" className="hero__logo">
           <span className="hero__logo-icon">🔥</span>
@@ -54,8 +59,8 @@ export default function Login() {
         <Link to="/" className="btn-ghost btn-sm">Volver al Inicio</Link>
       </nav>
 
-      <div className="login__container fade-up">
-        <div className="login__card">
+      <div className="login__container fade-up glass-content-wrapper">
+        <div className="login__card glass-card">
           <div className="login__header">
             <h1 className="login__title">Acceso al <span>Sistema</span></h1>
             <p className="login__subtitle">Ingresa tus credenciales para continuar</p>
@@ -73,6 +78,7 @@ export default function Login() {
               <input
                 type="email"
                 id="email"
+                className="glass-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="correo@pyroguard.mx"
@@ -86,6 +92,7 @@ export default function Login() {
               <input
                 type="password"
                 id="password"
+                className="glass-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"

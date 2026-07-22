@@ -10,13 +10,14 @@ export const AuthRemoteDataSource = {
     body.set('username', credentials.username);
     body.set('password', credentials.password);
 
-    return httpClient<LoginResponseDTO>('/v1/auth/login', {
+    return httpClient<LoginResponseDTO>('/auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: body.toString(),
       skipAuth: true, 
+      baseUrlOverride: 'https://pyroguard.inode.cloud',
     });
   },
 

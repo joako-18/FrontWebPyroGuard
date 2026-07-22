@@ -1,15 +1,15 @@
 .admin-layout {
   display: flex;
   min-height: 100vh;
-  background-color: var(--smoke);
+  /* background-color: var(--smoke); -> using glass-bg-container */
   color: var(--cream);
   font-family: var(--font-body);
 }
 
 .admin-sidebar {
   width: 250px;
-  background-color: var(--smoke);
-  border-right: 1px solid var(--bark);
+  /* background-color: var(--smoke); -> using glass-panel */
+  border-right: 1px solid rgba(255, 106, 0, 0.15); /* Glass border */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -56,17 +56,26 @@
   font-size: 1rem;
   letter-spacing: 0.05em;
   transition: all 0.2s;
+  padding: 0.5rem;
+  border-radius: var(--radius);
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover {
+  background: rgba(255, 106, 0, 0.1);
   color: var(--fire-glow);
+}
+
+.nav-link.active {
+  background: rgba(255, 106, 0, 0.15);
+  color: var(--fire-tip);
+  border-left: 3px solid var(--fire-core);
 }
 
 .sidebar-footer {
   margin-top: auto;
   padding: 1.5rem 2rem;
   position: relative;
-  border-top: 1px solid var(--bark);
+  border-top: 1px solid rgba(255, 106, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -114,12 +123,13 @@
   background-color: var(--fire-core);
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: var(--shadow-fire);
 }
 
 .logout-btn {
   background: none;
   border: none;
-  padding: 0;
+  padding: 0.5rem;
   color: var(--text-muted);
   font-size: 0.95rem;
   cursor: pointer;
@@ -128,14 +138,19 @@
   gap: 12px;
   font-family: inherit;
   transition: all 0.2s;
+  border-radius: var(--radius);
 }
 
 .logout-btn:hover {
+  background: rgba(255, 34, 0, 0.1);
   color: var(--fire-core);
 }
 
 .admin-main {
   flex: 1;
   padding: 4rem;
-  background-color: var(--smoke);
+  /* background-color: var(--smoke); -> transparent for glass effect */
+  background: transparent;
+  position: relative;
+  z-index: 10;
 }

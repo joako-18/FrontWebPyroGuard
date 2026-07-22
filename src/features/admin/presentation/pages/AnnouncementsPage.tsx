@@ -66,7 +66,7 @@ export default function AnnouncementsPage() {
       {isLoading && (
         <div className="announcements-list">
           {[1, 2, 3].map((i) => (
-            <div className="announcement-card" key={i}>
+            <div className="announcement-card glass-card" key={i}>
               <div className="card-header-top">
                 <div className="title-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Skeleton circle width={12} height={12} />
@@ -95,7 +95,7 @@ export default function AnnouncementsPage() {
       <div className="announcements-list">
         {!isLoading &&
           announcements.map((announcement) => (
-            <div className="announcement-card" key={announcement.id}>
+            <div className="announcement-card glass-card" key={announcement.id}>
               <div className="card-header-top">
                 <div className="title-group">
                   <span className={`status-dot dot-${announcement.alertLevel}`}></span>

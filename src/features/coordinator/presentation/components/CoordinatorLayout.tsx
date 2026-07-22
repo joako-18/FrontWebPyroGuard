@@ -23,9 +23,14 @@ export default function CoordinatorLayout() {
   };
   
   return (
-    <div className="coord-layout">
-      {}
-      <aside className="coord-sidebar">
+    <div className="coord-layout glass-bg-container">
+      {/* Ambient Glassmorphism Orbs */}
+      <div className="ambient-orb ambient-orb--fire" />
+      <div className="ambient-orb ambient-orb--ember" />
+      <div className="ambient-orb ambient-orb--ash" />
+      
+      {/* Barra lateral */}
+      <aside className="coord-sidebar glass-panel">
         <div className="sidebar-brand">
           <div className="brand-logo-box"></div>
           <span className="brand-text">PyroGuard</span>

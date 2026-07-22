@@ -45,19 +45,19 @@ export default function DashboardPage() {
         <>
           {}
           <div className="dashboard-summary-grid">
-            <div className="summary-card">
+            <div className="summary-card glass-card">
               <div className="summary-header">
                 <span>ZONAS MONITOREADAS</span>
               </div>
               <div className="summary-value">{zones.length}</div>
             </div>
-            <div className="summary-card">
+            <div className="summary-card glass-card">
               <div className="summary-header">
                 <span>ÁREA TOTAL PROTEGIDA</span>
               </div>
               <div className="summary-value">{formatHectares(totalArea)} ha</div>
             </div>
-            <div className="summary-card">
+            <div className="summary-card glass-card">
               <div className="summary-header">
                 <span>INCIDENTES HISTÓRICOS</span>
               </div>

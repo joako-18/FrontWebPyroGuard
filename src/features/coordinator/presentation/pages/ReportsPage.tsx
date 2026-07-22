@@ -55,7 +55,7 @@ export default function ReportsPage() {
           </div>
         )}
 
-        <div className="table-container">
+        <div className="table-container glass-card">
           <table className="reports-table">
             <thead>
               <tr>
@@ -148,7 +148,7 @@ export default function ReportsPage() {
           </div>
         )}
 
-        <div className="table-container">
+        <div className="table-container glass-card">
           <table className="reports-table">
             <thead>
               <tr>

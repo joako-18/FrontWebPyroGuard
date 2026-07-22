@@ -80,11 +80,7 @@
 }
 
 .table-container {
-  border: 1px solid var(--bark);
-  border-radius: var(--radius-lg);
-  background-color: rgba(26, 16, 8, 0.4);
   padding: 1.5rem 2.5rem;
-  backdrop-filter: blur(10px);
 }
 
 .users-table {

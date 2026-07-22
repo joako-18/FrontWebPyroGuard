@@ -100,14 +100,14 @@ export default function ZonesPage() {
 
       <div className="zones-grid">
         <div className="zones-column-main">
-          <section className="zones-card map-card">
+          <section className="zones-card map-card glass-card">
             <h2 className="section-subtitle">Incidentes Históricos</h2>
             <IncidentMap incidents={incidents} />
           </section>
         </div>
 
         <div className="zones-column-side">
-          <section className="zones-card action-card">
+          <section className="zones-card action-card glass-card">
             <h2 className="section-subtitle">Gestión de Zonas</h2>
             <p className="zones-count">
               <span className="count-number">{zones.length}</span>
@@ -118,7 +118,7 @@ export default function ZonesPage() {
             </button>
           </section>
 
-          <section className="zones-card threshold-card">
+          <section className="zones-card threshold-card glass-card">
             <h2 className="section-subtitle">Umbrales de Alerta</h2>
             <ThresholdForm initial={thresholds} onSave={handleThresholdSave} />
             {saveError && <p className="error-message">{saveError}</p>}

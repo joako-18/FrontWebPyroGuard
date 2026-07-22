@@ -23,9 +23,14 @@ export default function AdminLayout() {
   };
   
   return (
-    <div className="admin-layout">
-      {}
-      <aside className="admin-sidebar">
+    <div className="admin-layout glass-bg-container">
+      {/* Ambient Glassmorphism Orbs */}
+      <div className="ambient-orb ambient-orb--fire" />
+      <div className="ambient-orb ambient-orb--ember" />
+      <div className="ambient-orb ambient-orb--ash" />
+      
+      {/* Barra lateral */}
+      <aside className="admin-sidebar glass-panel">
         <div className="sidebar-brand">
           <div className="brand-logo-box"></div>
           <span className="brand-text">PyroGuard</span>

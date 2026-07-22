@@ -49,21 +49,21 @@ export default function BrigadesPage() {
 
       {}
       <div className="summary-grid">
-        <div className="summary-card">
+        <div className="summary-card glass-card">
           <div className="summary-header">
             <span>DISPONIBLES</span>
             <CheckCircle2 size={16} className="icon-muted" />
           </div>
           <div className="summary-value">{summary.disponibles}</div>
         </div>
-        <div className="summary-card">
+        <div className="summary-card glass-card">
           <div className="summary-header">
             <span>EN OPERACIÓN</span>
             <Activity size={16} className="icon-muted" />
           </div>
           <div className="summary-value">{summary.enOperacion}</div>
         </div>
-        <div className="summary-card">
+        <div className="summary-card glass-card">
           <div className="summary-header">
             <span>FUERA DE SERVICIO</span>
             <AlertTriangle size={16} className="icon-muted" />
@@ -75,7 +75,7 @@ export default function BrigadesPage() {
       {isLoading ? (
         <div className="brigades-grid">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div className="brigade-card" key={i}>
+            <div className="brigade-card glass-card" key={i}>
               <div className="brigade-header">
                 <Skeleton width={80} />
                 <Skeleton width={100} borderRadius={12} />
@@ -102,7 +102,7 @@ export default function BrigadesPage() {
             
             const statusLabel = brigade.isActive ? 'DISPONIBLE' : 'FUERA DE SERVICIO';
             return (
-              <div className="brigade-card" key={brigade.id}>
+              <div className="brigade-card glass-card" key={brigade.id}>
                 <div className="brigade-header">
                   <span className="brigade-id">{brigade.id.split('-')[0]}</span>
                   <span className={`status-badge badge-${statusLabel.replace(/\s+/g, '-').toLowerCase()}`}>

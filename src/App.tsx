@@ -20,6 +20,7 @@ import ReportsPage from './features/coordinator/presentation/pages/ReportsPage';
 import DashboardPage from './features/coordinator/presentation/pages/DashboardPage';
 import ZonesPage from './features/admin/presentation/pages/ZonesPage';
 import ProtectedRoute from './app/routes/ProtectedRoute';
+import PaymentGuard from './features/payment/presentation/components/PaymentGuard'; // 👈 IMPORTAR
 import NotFound from './app/routes/NotFound';
 
 function Home() {
@@ -48,12 +49,14 @@ export default function App() {
         
         {}
         <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route element={<PaymentGuard />}>
+            <Route path="/admin" element={<AdminLayout />}>
             <Route path="usuarios" element={<UsersPage />} />
-            <Route path="comunicados" element={<AnnouncementsPage />} />
-            <Route path="zonas" element={<ZonesPage />} />
+           <Route path="comunicados" element={<AnnouncementsPage />} />
+          <Route path="zonas" element={<ZonesPage />} />
           </Route>
-        </Route>
+  </Route>
+</Route>
 
         {}
         <Route element={<ProtectedRoute allowedRoles={['Coordinador']} />}>

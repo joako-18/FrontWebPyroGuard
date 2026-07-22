@@ -1,4 +1,5 @@
 import { httpClient } from '../../../../shared/api/httpClient';
+import { ENV } from '../../../../shared/config/env';
 import type { LoginRequestDTO, LoginResponseDTO } from '../dto/LoginDTO';
 import type { RegisterRequestDTO, RegisterResponseDTO } from '../dto/RegisterDTO';
 
@@ -10,25 +11,24 @@ export const AuthRemoteDataSource = {
     body.set('username', credentials.username);
     body.set('password', credentials.password);
 
-    return httpClient<LoginResponseDTO>('/auth/', {
+    return httpClient<LoginResponseDTO>('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: body.toString(),
       skipAuth: true, 
-      baseUrlOverride: 'https://pyroguard.inode.cloud',
+      baseUrlOverride: ENV.API_BASE_URL_LOGIN,
     });
   },
 
   async register(data: RegisterRequestDTO): Promise<RegisterResponseDTO> {
     
-    return httpClient<RegisterResponseDTO>('/v1/auth/register', {
+    return httpClient<RegisterResponseDTO>('/register', {
       method: 'POST',
       body: JSON.stringify(data),
-      
-      
-      
+      baseUrlOverride: ENV.API_BASE_URL_LOGIN,
+      skipAuth: true,
     });
   },
 };

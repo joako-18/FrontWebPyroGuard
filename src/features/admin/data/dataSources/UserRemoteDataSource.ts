@@ -9,7 +9,7 @@ import { ENV } from '../../../../shared/config/env';
 
 export const UserRemoteDataSource = {
   async getAll(role?: string): Promise<UserDTO[]> {
-    const url = role ? `/internal/users?rol=${role}` : '/internal/users';
+    const url = role ? `/auth/internal/users?rol=${role}` : '/auth/internal/users';
     return httpClient<UserDTO[]>(url, {
       method: 'GET',
       headers: {

@@ -20,15 +20,23 @@ export const UserRemoteDataSource = {
   },
 
   async update(id: string, data: UpdateUserRequestDTO): Promise<UpdateUserResponseDTO> {
-    return httpClient<UpdateUserResponseDTO>(`/v1/usuarios/${id}`, {
+    return httpClient<UpdateUserResponseDTO>(`/auth/internal/users/${id}/rol`, {
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: JSON.stringify({ rol: data.rol }), // El endpoint sólo espera el rol
+      headers: {
+        'x-api-key': ENV.API_KEY_INTERNAL,
+      },
+      baseUrlOverride: 'https://pyroguard.inode.cloud',
     });
   },
 
   async delete(id: string): Promise<DeleteUserResponseDTO> {
-    return httpClient<DeleteUserResponseDTO>(`/v1/usuarios/${id}`, {
+    return httpClient<DeleteUserResponseDTO>(`/auth/internal/users/${id}`, {
       method: 'DELETE',
+      headers: {
+        'x-api-key': ENV.API_KEY_INTERNAL,
+      },
+      baseUrlOverride: 'https://pyroguard.inode.cloud',
     });
   },
 };

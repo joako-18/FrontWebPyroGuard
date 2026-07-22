@@ -3,9 +3,10 @@ export interface UserDTO {
   id_usuario: string;
   nombre: string;
   email: string;
-  rol: string;
-  activo: boolean;
-  creado_en: string;
+  rol?: string;
+  roles?: string[];
+  activo?: boolean;
+  creado_en?: string;
 }
 
 export interface UpdateUserRequestDTO {

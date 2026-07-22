@@ -11,23 +11,36 @@ export const AnnouncementRepositoryImpl: IAnnouncementRepository = {
     alertLevel: AlertLevel,
     validUntil: string
   ): Promise<Announcement> {
-    const contenido = AnnouncementMapper.buildContentField(description, zones, alertLevel);
-    const dto = await AnnouncementRemoteDataSource.create({
-      titulo: title,
-      contenido,
-      fecha_vigencia: validUntil,
-    });
-    return AnnouncementMapper.toDomain(dto);
+    if (alertLevel === 'critical') {
+      const dto = await AnnouncementRemoteDataSource.createEmergency({
+        id_zona: zones,
+        mensaje_adicional: description,
+        fecha_vigencia: validUntil,
+      });
+      return AnnouncementMapper.toDomain(dto);
+    } else {
+      const contenido = AnnouncementMapper.buildContentField(description, zones, alertLevel);
+      const dto = await AnnouncementRemoteDataSource.create({
+        titulo: title,
+        contenido,
+        fecha_vigencia: validUntil,
+      });
+      return AnnouncementMapper.toDomain(dto);
+    }
   },
 
   async getActive(): Promise<Announcement[]> {
-    const dtos = await AnnouncementRemoteDataSource.getActive();
-    return AnnouncementMapper.toDomainList(dtos);
+    const dtos = await AnnouncementRemoteDataSource.getAll();
+    const all = AnnouncementMapper.toDomainList(dtos);
+    const now = new Date().getTime();
+    return all.filter(a => new Date(a.validUntil).getTime() > now);
   },
 
   async getHistory(): Promise<Announcement[]> {
-    const dtos = await AnnouncementRemoteDataSource.getHistory();
-    return AnnouncementMapper.toDomainList(dtos);
+    const dtos = await AnnouncementRemoteDataSource.getAll();
+    const all = AnnouncementMapper.toDomainList(dtos);
+    const now = new Date().getTime();
+    return all.filter(a => new Date(a.validUntil).getTime() <= now);
   },
 
   async delete(id: string): Promise<string> {

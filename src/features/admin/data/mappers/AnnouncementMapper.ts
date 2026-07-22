@@ -37,12 +37,17 @@ function parseContent(raw: string): { description: string; zones: string; alertL
 export const AnnouncementMapper = {
   toDomain(dto: AnnouncementDTO): Announcement {
     const { description, zones, alertLevel } = parseContent(dto.contenido);
+    
+    // Detect if this is a backend-generated emergency alert (no META tags)
+    const isEmergency = !dto.contenido.includes(META_SEPARATOR) && 
+      (dto.titulo.toLowerCase().includes('emergencia') || dto.titulo.toLowerCase().includes('crític') || dto.titulo.toLowerCase().includes('critical'));
+
     return {
       id: dto.id_comunicado,
       title: dto.titulo,
       description,
-      zones,
-      alertLevel,
+      zones: isEmergency ? 'Zona de Emergencia' : zones,
+      alertLevel: isEmergency ? 'critical' : alertLevel,
       authorId: dto.id_autor,
       publishedAt: dto.fecha_publicacion,
       validUntil: dto.fecha_vigencia,

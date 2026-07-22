@@ -5,6 +5,12 @@ export interface CreateAnnouncementRequestDTO {
   fecha_vigencia: string; 
 }
 
+export interface CreateEmergencyAnnouncementRequestDTO {
+  id_zona: string;
+  mensaje_adicional: string;
+  fecha_vigencia: string;
+}
+
 export interface AnnouncementDTO {
   id_comunicado: string;
   titulo: string;

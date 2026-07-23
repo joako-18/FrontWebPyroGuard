@@ -49,11 +49,9 @@ export async function createPaymentCharge(
   if (authStorage) {
     try {
       const parsed = JSON.parse(authStorage);
-      token = parsed.state?.token || null;
-      if (parsed.state?.user) {
-        userEmail = parsed.state.user.email || userEmail;
-        userName = parsed.state.user.nombre || parsed.state.user.name || userName;
-      }
+      token = parsed.state?.accessToken || null;
+      userName = parsed.state?.userName || userName;
+      // Nota: email no se guarda en nuestro authStore por defecto, usaremos el fallback
     } catch (e) {
       console.error('Error al leer auth-storage:', e);
     }
@@ -99,7 +97,7 @@ export async function checkPaymentStatus(): Promise<{ is_paid: boolean; payment_
   if (authStorage) {
     try {
       const parsed = JSON.parse(authStorage);
-      token = parsed.state?.token || null;
+      token = parsed.state?.accessToken || null;
     } catch (e) {
       console.error('Error al leer auth-storage:', e);
     }

@@ -8,27 +8,42 @@ export function useTechnicalReports(selectedZone: string) {
   const [isRequesting, setIsRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchReports = async () => {
+  const fetchReports = async (silent = false) => {
     if (!selectedZone) {
       setReports([]);
       return;
     }
-    setIsLoading(true);
-    setError(null);
+    if (!silent) setIsLoading(true);
+    if (!silent) setError(null);
     try {
       const ds = new OperationsRemoteDataSource();
       const data = await ds.getTechnicalReportsByZone(selectedZone);
       setReports(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al cargar reportes técnicos');
+      if (!silent) setError(err instanceof Error ? err.message : 'Error al cargar reportes técnicos');
     } finally {
-      setIsLoading(false);
+      if (!silent) setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchReports();
   }, [selectedZone]);
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    
+    const hasProcessing = reports.some(r => r.estado === 'Procesando');
+    if (hasProcessing) {
+      interval = setInterval(() => {
+        fetchReports(true);
+      }, 3000);
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [reports, selectedZone]);
 
   const requestReport = async () => {
     if (!selectedZone) return;

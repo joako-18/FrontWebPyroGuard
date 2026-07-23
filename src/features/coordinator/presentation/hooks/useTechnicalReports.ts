@@ -31,19 +31,18 @@ export function useTechnicalReports(selectedZone: string) {
   }, [selectedZone]);
 
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-    
-    const hasProcessing = reports.some(r => r.estado === 'Procesando');
-    if (hasProcessing) {
-      interval = setInterval(() => {
-        fetchReports(true);
-      }, 3000);
-    }
+    const handleFcmMessage = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      console.log('FCM recibido en useTechnicalReports, refrescando tabla...', customEvent.detail);
+      fetchReports(true); // silent fetch
+    };
+
+    window.addEventListener('fcm-message', handleFcmMessage);
     
     return () => {
-      if (interval) clearInterval(interval);
+      window.removeEventListener('fcm-message', handleFcmMessage);
     };
-  }, [reports, selectedZone]);
+  }, [selectedZone]);
 
   const requestReport = async () => {
     if (!selectedZone) return;

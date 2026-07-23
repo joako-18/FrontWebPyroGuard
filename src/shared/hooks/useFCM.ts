@@ -82,6 +82,10 @@ export function useFCM() {
     if (messaging) {
       const unsubscribe = onMessage(messaging, (payload) => {
         console.log('Mensaje recibido en foreground:', payload);
+        
+        // Despachamos un evento global para que las tablas u otros componentes se enteren
+        window.dispatchEvent(new CustomEvent('fcm-message', { detail: payload }));
+
         toast(
           `${payload.notification?.title}\n${payload.notification?.body}`,
           { 

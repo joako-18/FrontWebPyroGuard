@@ -5,8 +5,24 @@ import { registerFCMToken } from '../api/notificationsApi';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '../../features/auth/presentation/store/authStore';
 
+function parseJwt(token: string) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }
+}
+
 export function useFCM() {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const accessToken = useAuthStore(state => state.accessToken);
+  const storeUserId = useAuthStore(state => state.userId);
+  
   const [permission, setPermission] = useState<NotificationPermission>(
     'Notification' in window ? Notification.permission : 'denied'
   );
@@ -18,8 +34,18 @@ export function useFCM() {
         const token = await getToken(messaging, { vapidKey });
         
         if (token) {
-          console.log('FCM Token obtenido:', token);
-          await registerFCMToken(token);
+          let userId = storeUserId;
+          if (!userId && accessToken) {
+            const payload = parseJwt(accessToken);
+            userId = payload?.sub || payload?.id_usuario;
+          }
+          
+          if (userId) {
+            console.log('FCM Token obtenido:', token);
+            await registerFCMToken(userId, token);
+          } else {
+            console.error('No se pudo determinar el id_usuario, token no enviado.');
+          }
         }
       }
     } catch (error) {

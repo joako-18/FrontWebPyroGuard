@@ -11,7 +11,7 @@ interface PaymentState {
   resetPayment: () => void;
 }
 
-export const usePaymentStore = create<PaymentState>((set, get) => ({
+export const usePaymentStore = create<PaymentState>((set) => ({
   isPaid: localStorage.getItem('payment_status') === 'paid',
   isLoading: false,
   paymentStatus: localStorage.getItem('payment_status') === 'paid' ? 'succeeded' : null,

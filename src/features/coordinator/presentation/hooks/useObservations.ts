@@ -37,8 +37,12 @@ export function useObservations() {
         const ds = new OperationsRemoteDataSource();
         const data = await ds.getObservationsByZone(selectedZone);
         setObservations(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error al cargar observaciones');
+      } catch (err: unknown) {
+        if (err && typeof err === 'object' && 'status' in err && (err as any).status === 404) {
+          setObservations([]);
+        } else {
+          setError(err instanceof Error ? err.message : 'Error al cargar observaciones');
+        }
       } finally {
         setIsLoading(false);
       }

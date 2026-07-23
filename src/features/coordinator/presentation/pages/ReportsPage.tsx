@@ -154,6 +154,7 @@ export default function ReportsPage() {
           <table className="reports-table">
             <thead>
               <tr>
+                <th>Brigadista</th>
                 <th>Condiciones</th>
                 <th>Recursos Necesarios</th>
                 <th>Observaciones</th>
@@ -164,7 +165,7 @@ export default function ReportsPage() {
             <tbody>
               {!selectedZone && (
                 <tr>
-                  <td colSpan={5} className="empty-cell">Selecciona una zona para ver sus observaciones.</td>
+                  <td colSpan={6} className="empty-cell">Selecciona una zona para ver sus observaciones.</td>
                 </tr>
               )}
               
@@ -172,6 +173,7 @@ export default function ReportsPage() {
                 <>
                   {[1, 2, 3].map(i => (
                     <tr key={i}>
+                      <td><Skeleton width={100} /></td>
                       <td><Skeleton width={120} /></td>
                       <td><Skeleton width={120} /></td>
                       <td><Skeleton width={180} /></td>
@@ -184,13 +186,14 @@ export default function ReportsPage() {
 
               {selectedZone && !loadingObs && observations.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="empty-cell">No se encontraron observaciones en esta zona.</td>
+                  <td colSpan={6} className="empty-cell">No se encontraron observaciones en esta zona.</td>
                 </tr>
               )}
 
               {selectedZone && !loadingObs &&
                 observations.map((obs) => (
                   <tr key={obs.id_observacion}>
+                    <td>{obs.brigadista_nombre || 'Desconocido'}</td>
                     <td className="desc-cell">{obs.condiciones}</td>
                     <td>{obs.recursos_necesarios}</td>
                     <td>{obs.observaciones_texto}</td>

@@ -90,6 +90,7 @@ export class OperationsRemoteDataSource {
 export interface ObservationDTO {
   id_observacion: string;
   id_brigadista: string;
+  brigadista_nombre?: string;
   id_zona: string;
   latitud: number;
   longitud: number;

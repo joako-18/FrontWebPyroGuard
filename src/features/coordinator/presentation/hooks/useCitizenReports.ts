@@ -22,7 +22,11 @@ export function useCitizenReports() {
       }
     } catch (err: unknown) {
       if (isMounted.current) {
-        setError(err instanceof Error ? err.message : 'Error al cargar reportes');
+        if (err && typeof err === 'object' && 'status' in err && (err as any).status === 404) {
+          setReports([]);
+        } else {
+          setError(err instanceof Error ? err.message : 'Error al cargar reportes');
+        }
       }
     } finally {
       if (isMounted.current) {

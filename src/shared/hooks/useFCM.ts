@@ -17,11 +17,9 @@ export function useFCM() {
         const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY || 'TU_VAPID_KEY_AQUI';
         const token = await getToken(messaging, { vapidKey });
         
-        if (token && userId) {
+        if (token) {
           console.log('FCM Token obtenido:', token);
-          await registerFCMToken(userId, token);
-        } else if (!userId) {
-          console.log('Usuario no autenticado, token no registrado.');
+          await registerFCMToken(token);
         }
       }
     } catch (error) {

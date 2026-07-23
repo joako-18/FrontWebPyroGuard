@@ -46,4 +46,21 @@ export const AnnouncementRepositoryImpl: IAnnouncementRepository = {
   async delete(id: string): Promise<string> {
     return AnnouncementRemoteDataSource.delete(id);
   },
+
+  async update(
+    id: string,
+    title: string,
+    description: string,
+    zones: string,
+    alertLevel: AlertLevel,
+    validUntil: string
+  ): Promise<Announcement> {
+    const contenido = AnnouncementMapper.buildContentField(description, zones, alertLevel);
+    const dto = await AnnouncementRemoteDataSource.update(id, {
+      titulo: title,
+      contenido,
+      fecha_vigencia: validUntil,
+    });
+    return AnnouncementMapper.toDomain(dto);
+  },
 };

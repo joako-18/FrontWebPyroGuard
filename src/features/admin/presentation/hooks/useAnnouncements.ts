@@ -101,6 +101,34 @@ export function useAnnouncements(initialMode: ViewMode = 'active') {
     }
   }
 
+  async function updateAnnouncement(
+    id: string,
+    title: string,
+    description: string,
+    zones: string,
+    alertLevel: AlertLevel,
+    validUntil: string
+  ): Promise<boolean> {
+    setError(null);
+    try {
+      // Import this dynamically or at the top
+      const { updateAnnouncementUseCase } = await import('../../domain/useCases/UpdateAnnouncementUseCase');
+      const updated = await updateAnnouncementUseCase(id, title, description, zones, alertLevel, validUntil);
+      
+      setAnnouncements((prev) => prev.map((a) => (a.id === id ? updated : a)));
+      return true;
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('No se pudo actualizar el comunicado.');
+      }
+      return false;
+    }
+  }
+
   return {
     announcements,
     isLoading,
@@ -109,6 +137,7 @@ export function useAnnouncements(initialMode: ViewMode = 'active') {
     setViewMode,
     fetchAnnouncements,
     createAnnouncement,
+    updateAnnouncement,
     deleteAnnouncement,
   };
 }

@@ -20,10 +20,22 @@ export default function AnnouncementsPage() {
     viewMode,
     setViewMode,
     createAnnouncement,
+    updateAnnouncement,
     deleteAnnouncement,
   } = useAnnouncements('active');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingAnnouncement, setEditingAnnouncement] = useState<Announcement | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const openNewModal = () => {
+    setEditingAnnouncement(null);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (announcement: Announcement) => {
+    setEditingAnnouncement(announcement);
+    setIsModalOpen(true);
+  };
 
   const handleDelete = async (announcement: Announcement) => {
     const confirmed = window.confirm(`¿Eliminar el comunicado "${announcement.title}"?`);
@@ -55,7 +67,7 @@ export default function AnnouncementsPage() {
               Historial
             </button>
           </div>
-          <button className="btn-new" onClick={() => setIsModalOpen(true)}>
+          <button className="btn-new" onClick={openNewModal}>
             Nuevo Comunicado
           </button>
         </div>
@@ -124,7 +136,12 @@ export default function AnnouncementsPage() {
                 </div>
 
                 <div className="action-buttons">
-                  <button className="btn-icon-sq" title="Editar" disabled>
+                  <button 
+                    className="btn-icon-sq" 
+                    title="Editar" 
+                    onClick={() => openEditModal(announcement)}
+                    disabled={deletingId === announcement.id}
+                  >
                     <Edit2 size={14} />
                   </button>
                   <button
@@ -145,6 +162,8 @@ export default function AnnouncementsPage() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onCreate={createAnnouncement}
+        onUpdate={updateAnnouncement}
+        announcementToEdit={editingAnnouncement}
       />
     </div>
   );

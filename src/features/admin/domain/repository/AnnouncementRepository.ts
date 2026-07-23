@@ -11,4 +11,12 @@ export interface IAnnouncementRepository {
   getActive(): Promise<Announcement[]>;
   getHistory(): Promise<Announcement[]>;
   delete(id: string): Promise<string>;
+  update(
+    id: string,
+    title: string,
+    description: string,
+    zones: string,
+    alertLevel: AlertLevel,
+    validUntil: string
+  ): Promise<Announcement>;
 }

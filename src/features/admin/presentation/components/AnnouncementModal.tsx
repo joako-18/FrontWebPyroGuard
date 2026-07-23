@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { X } from 'lucide-react';
 import type { AlertLevel } from '../../domain/entities/Announcement';
+import { httpClient } from '../../../../shared/api/httpClient';
+import { ENV } from '../../../../shared/config/env';
 import './AnnouncementModal.css';
+
+interface ZoneSimple {
+  id_zona: string;
+  nombre: string;
+}
 
 interface AnnouncementModalProps {
   isOpen: boolean;
   onClose: () => void;
-    onCreate: (
+  announcementToEdit?: import('../../domain/entities/Announcement').Announcement | null;
+  onCreate: (
+    title: string,
+    description: string,
+    zones: string,
+    alertLevel: AlertLevel,
+    validUntil: string
+  ) => Promise<boolean>;
+  onUpdate?: (
+    id: string,
     title: string,
     description: string,
     zones: string,
@@ -30,7 +46,7 @@ function defaultValidUntil(): string {
   return toDatetimeLocalValue(d);
 }
 
-export default function AnnouncementModal({ isOpen, onClose, onCreate }: AnnouncementModalProps) {
+export default function AnnouncementModal({ isOpen, onClose, onCreate, onUpdate, announcementToEdit }: AnnouncementModalProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [zones, setZones] = useState('');
@@ -38,6 +54,32 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
   const [validUntil, setValidUntil] = useState(defaultValidUntil());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [availableZones, setAvailableZones] = useState<ZoneSimple[]>([]);
+
+  useEffect(() => {
+    if (isOpen) {
+      httpClient<ZoneSimple[]>('/zonas/simple', { baseUrlOverride: ENV.ML_API_BASE_URL })
+        .then(setAvailableZones)
+        .catch(console.error);
+
+      if (announcementToEdit) {
+        setTitle(announcementToEdit.title);
+        setDescription(announcementToEdit.description);
+        setZones(announcementToEdit.zones || '');
+        setAlertLevel(announcementToEdit.alertLevel);
+        const d = new Date(announcementToEdit.validUntil);
+        // Ajustar para evitar NaNs si la fecha es inválida
+        if (!isNaN(d.getTime())) setValidUntil(toDatetimeLocalValue(d));
+      } else {
+        setTitle('');
+        setDescription('');
+        setZones('');
+        setAlertLevel('');
+        setValidUntil(defaultValidUntil());
+        setError(null);
+      }
+    }
+  }, [isOpen, announcementToEdit]);
 
   if (!isOpen) return null;
 
@@ -66,7 +108,12 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
     // new Date() lo interpreta en hora local del navegador, que es lo esperado.
     const validUntilISO = new Date(validUntil).toISOString();
 
-    const ok = await onCreate(title, description, zones, alertLevel, validUntilISO);
+    let ok = false;
+    if (announcementToEdit && onUpdate) {
+      ok = await onUpdate(announcementToEdit.id, title, description, zones, alertLevel, validUntilISO);
+    } else {
+      ok = await onCreate(title, description, zones, alertLevel, validUntilISO);
+    }
 
     setIsSubmitting(false);
     if (ok) {
@@ -84,7 +131,10 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
           <X size={20} />
         </button>
 
-        <h2 className="modal-title">Nuevo <span>Comunicado</span></h2>
+        <h2 className="modal-title">
+          {announcementToEdit ? 'Editar ' : 'Nuevo '}
+          <span>Comunicado</span>
+        </h2>
 
         <form className="modal-form" onSubmit={handleSubmit}>
           {error && (
@@ -134,15 +184,18 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
 
           <div className="form-row">
             <div className="form-group full-width">
-              <label>{alertLevel === 'critical' ? 'ID de la Zona (Obligatorio para emergencias)' : 'Zonas Afectadas (Opcional)'}</label>
-              <input
-                type="text"
-                placeholder={alertLevel === 'critical' ? "Ej. 3fa85f64-5717-4562..." : "Ej. Z1, Z2, Z4"}
+              <label>{alertLevel === 'critical' ? 'Zona Afectada (Obligatorio para emergencias)' : 'Zonas Afectadas (Opcional)'}</label>
+              <select
                 value={zones}
                 onChange={(e) => setZones(e.target.value)}
                 disabled={isSubmitting}
                 required={alertLevel === 'critical'}
-              />
+              >
+                <option value="">-- Selecciona una zona --</option>
+                {availableZones.map(z => (
+                  <option key={z.id_zona} value={z.id_zona}>{z.nombre}</option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -162,7 +215,7 @@ export default function AnnouncementModal({ isOpen, onClose, onCreate }: Announc
               Cancelar
             </button>
             <button type="submit" className="btn-primary" disabled={isSubmitting}>
-              {isSubmitting ? 'Publicando...' : 'Publicar Comunicado'}
+              {isSubmitting ? 'Guardando...' : (announcementToEdit ? 'Actualizar' : 'Publicar Comunicado')}
             </button>
           </div>
         </form>

@@ -32,4 +32,11 @@ export const AnnouncementRemoteDataSource = {
       method: 'DELETE',
     });
   },
+
+  async update(id: string, data: CreateAnnouncementRequestDTO): Promise<AnnouncementDTO> {
+    return httpClient<AnnouncementDTO>(`/v1/comunicados/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
 };

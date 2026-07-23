@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useAuthStore } from '../../features/auth/presentation/store/authStore';
 
 export function useFCM() {
-  const userId = useAuthStore(state => state.userId);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   const [permission, setPermission] = useState<NotificationPermission>(
     'Notification' in window ? Notification.permission : 'denied'
   );
@@ -47,10 +47,10 @@ export function useFCM() {
   };
 
   useEffect(() => {
-    if (permission === 'granted' && userId) {
+    if (permission === 'granted' && isAuthenticated) {
       fetchToken();
     }
-  }, [permission, userId]);
+  }, [permission, isAuthenticated]);
 
   useEffect(() => {
     if (messaging) {

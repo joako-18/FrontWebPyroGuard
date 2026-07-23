@@ -33,7 +33,9 @@ export default function Login() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    login(email, password);
+    // Sanitización: Trim y normalización a minúsculas
+    const cleanEmail = email.trim().toLowerCase();
+    login(cleanEmail, password);
   };
 
   return (

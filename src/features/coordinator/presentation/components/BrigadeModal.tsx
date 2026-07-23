@@ -29,7 +29,9 @@ export default function BrigadeModal({ isOpen, onClose, onSave }: BrigadeModalPr
         }
       }
       
-      await onSave(name, coordinatorId);
+      // Sanitización
+      const cleanName = name.trim();
+      await onSave(cleanName, coordinatorId);
       setName('');
       onClose();
     } catch (err) {

@@ -42,7 +42,9 @@ export default function AssignZoneModal({ isOpen, onClose, onSave, brigadeId }: 
     e.preventDefault();
     setSaving(true);
     try {
-      await onSave(brigadeId, zoneId, notes);
+      // Sanitización
+      const cleanNotes = notes.trim();
+      await onSave(brigadeId, zoneId, cleanNotes);
       setZoneId('');
       setNotes('');
       onClose();

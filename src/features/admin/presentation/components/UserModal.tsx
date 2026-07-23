@@ -81,7 +81,11 @@ export default function UserModal({
     }
 
     // Modo crear: el rol aquí usa los mismos valores que AuthRole (Admin/Coordinador/Analista/Brigadista)
-    const user = await createUser(name, email, password, role as AuthRole);
+    // Sanitización: Input cleaning (trim) y normalización
+    const cleanName = name.trim();
+    const cleanEmail = email.trim().toLowerCase();
+    
+    const user = await createUser(cleanName, cleanEmail, password, role as AuthRole);
     if (user) {
       onUserCreated?.();
       onClose();

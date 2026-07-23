@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { Incident } from '../../domain/entities/Incident';
 import './IncidentMap.css';
@@ -41,6 +41,7 @@ export default function IncidentMap({ incidents }: Props) {
         zoom={8}
         className="incident-map"
         scrollWheelZoom={true}
+        preferCanvas={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -51,7 +52,17 @@ export default function IncidentMap({ incidents }: Props) {
           const coords = parseWktPoint(inc.coordenadaWkt);
           if (!coords) return null;
           return (
-            <Marker key={inc.id} position={coords}>
+            <CircleMarker 
+              key={inc.id} 
+              center={coords}
+              radius={6}
+              pathOptions={{ 
+                color: '#ffffff', 
+                weight: 1, 
+                fillColor: '#ef4444', 
+                fillOpacity: 0.8 
+              }}
+            >
               <Popup>
                 <div className="incident-popup">
                   <strong>{inc.fuente}</strong><br />
@@ -59,7 +70,7 @@ export default function IncidentMap({ incidents }: Props) {
                   Fecha: {new Date(inc.fecha).toLocaleDateString('es-MX')}
                 </div>
               </Popup>
-            </Marker>
+            </CircleMarker>
           );
         })}
       </MapContainer>

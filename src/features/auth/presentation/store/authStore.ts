@@ -35,7 +35,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: true,
         }),
 
-      logout: () =>
+      logout: () => {
         set({
           accessToken: null,
           tokenType: null,
@@ -43,7 +43,11 @@ export const useAuthStore = create<AuthState>()(
           userName: null,
           userId: null,
           isAuthenticated: false,
-        }),
+        });
+        localStorage.removeItem('payment_status');
+        localStorage.removeItem('payment_id');
+        localStorage.removeItem('payment_method');
+      },
     }),
     {
       name: 'auth-storage', 

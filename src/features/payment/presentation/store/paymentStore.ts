@@ -30,18 +30,20 @@ export const usePaymentStore = create<PaymentState>((set, get) => ({
   },
 
   checkPaymentStatus: async () => {
-    const { isPaid } = get();
-    if (isPaid) return;
-
     set({ isLoading: true });
     try {
       const response = await checkPaymentStatusApi();
       if (response.is_paid) {
         set({ isPaid: true, paymentStatus: 'succeeded' });
         localStorage.setItem('payment_status', 'paid');
+      } else {
+        set({ isPaid: false, paymentStatus: null });
+        localStorage.removeItem('payment_status');
       }
     } catch (error) {
       console.error('Error checking payment status:', error);
+      set({ isPaid: false, paymentStatus: null });
+      localStorage.removeItem('payment_status');
     } finally {
       set({ isLoading: false });
     }

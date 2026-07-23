@@ -9,8 +9,9 @@ interface AuthState {
   tokenType: string | null;
   role: Role | null;
   userName: string | null;
+  userId: string | null;
   isAuthenticated: boolean;
-  setSession: (session: AuthSession, role: Role, userName: string) => void;
+  setSession: (session: AuthSession, role: Role, userName: string, userId: string) => void;
   logout: () => void;
 }
 
@@ -21,14 +22,16 @@ export const useAuthStore = create<AuthState>()(
       tokenType: null,
       role: null,
       userName: null,
+      userId: null,
       isAuthenticated: false,
 
-      setSession: (session, role, userName) =>
+      setSession: (session, role, userName, userId) =>
         set({
           accessToken: session.accessToken,
           tokenType: session.tokenType,
           role,
           userName,
+          userId,
           isAuthenticated: true,
         }),
 
@@ -38,6 +41,7 @@ export const useAuthStore = create<AuthState>()(
           tokenType: null,
           role: null,
           userName: null,
+          userId: null,
           isAuthenticated: false,
         }),
     }),

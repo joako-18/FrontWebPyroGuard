@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { LogOut, Bell } from 'lucide-react';
 import { useAuthStore } from '../../../auth/presentation/store/authStore';
 import { useFCM } from '../../../../shared/hooks/useFCM';
 import './CoordinatorLayout.css';
@@ -9,7 +9,7 @@ export default function CoordinatorLayout() {
   const navigate = useNavigate();
   const { userName, role, logout } = useAuthStore();
   
-  useFCM();
+  const { permission, requestPermission } = useFCM();
 
   const handleLogout = () => {
     logout();
@@ -70,6 +70,12 @@ export default function CoordinatorLayout() {
               <span className="user-role">{role || 'Coordinador'}</span>
             </div>
           </div>
+          {permission === 'default' && (
+            <button onClick={requestPermission} className="nav-link logout-btn" style={{ marginBottom: '0.5rem', opacity: 0.8 }}>
+              <Bell size={16} />
+              Activar Notificaciones
+            </button>
+          )}
           <button onClick={handleLogout} className="nav-link logout-btn">
             <LogOut size={16} />
             Salir

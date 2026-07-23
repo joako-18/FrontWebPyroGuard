@@ -40,15 +40,19 @@ export function useLogin() {
       let role: Role = 'Admin';
       let userName: string = email.split('@')[0];
 
+      let userId: string = '';
+
       if (session.user && session.user.role) {
         role = (session.user.role as Role);
         userName = session.user.name || userName;
+        userId = session.user.id || '';
       } else {
         const payload = parseJwt(session.accessToken);
         if (payload?.roles && payload.roles.length > 0) {
           role = payload.roles[0] as Role;
-        } else if (payload?.sub) {
-          // Fallback if needed
+        }
+        if (payload?.sub) {
+          userId = payload.sub;
         }
       }
       
@@ -61,7 +65,7 @@ export function useLogin() {
         else if (lowerRole.includes('brigad')) role = 'Brigadista';
       }
       
-      setSession(session, role, userName);
+      setSession(session, role, userName, userId);
 
       if (role === 'Admin') {
         navigate('/admin/usuarios');

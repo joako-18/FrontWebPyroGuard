@@ -1,34 +1,60 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getToken, onMessage } from 'firebase/messaging';
 import { messaging } from '../config/firebase';
 import { registerFCMToken } from '../api/notificationsApi';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '../../features/auth/presentation/store/authStore';
 
 export function useFCM() {
-  useEffect(() => {
-    async function requestPermission() {
-      try {
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted' && messaging) {
-          // Obtener el token FCM. Reemplaza VITE_FIREBASE_VAPID_KEY en tu .env
-          const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY || 'TU_VAPID_KEY_AQUI';
-          const token = await getToken(messaging, { vapidKey });
-          
-          if (token) {
-            console.log('FCM Token obtenido:', token);
-            await registerFCMToken(token);
-          }
-        } else {
-          console.warn('Permiso de notificaciones no concedido.');
+  const userId = useAuthStore(state => state.userId);
+  const [permission, setPermission] = useState<NotificationPermission>(
+    'Notification' in window ? Notification.permission : 'denied'
+  );
+
+  const fetchToken = async () => {
+    try {
+      if (messaging) {
+        const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY || 'TU_VAPID_KEY_AQUI';
+        const token = await getToken(messaging, { vapidKey });
+        
+        if (token && userId) {
+          console.log('FCM Token obtenido:', token);
+          await registerFCMToken(userId, token);
+        } else if (!userId) {
+          console.log('Usuario no autenticado, token no registrado.');
         }
-      } catch (error) {
-        console.error('Error al configurar FCM:', error);
       }
+    } catch (error) {
+      console.error('Error al configurar FCM:', error);
     }
+  };
 
-    requestPermission();
+  const requestPermission = async () => {
+    if (!('Notification' in window)) {
+      toast.error('Este navegador no soporta notificaciones');
+      return;
+    }
+    try {
+      const perm = await Notification.requestPermission();
+      setPermission(perm);
+      if (perm === 'granted') {
+        await fetchToken();
+        toast.success('Notificaciones habilitadas');
+      } else {
+        toast.error('Permiso de notificaciones denegado');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    // Listener para primer plano
+  useEffect(() => {
+    if (permission === 'granted' && userId) {
+      fetchToken();
+    }
+  }, [permission, userId]);
+
+  useEffect(() => {
     if (messaging) {
       const unsubscribe = onMessage(messaging, (payload) => {
         console.log('Mensaje recibido en foreground:', payload);
@@ -46,4 +72,6 @@ export function useFCM() {
       };
     }
   }, []);
+
+  return { permission, requestPermission };
 }

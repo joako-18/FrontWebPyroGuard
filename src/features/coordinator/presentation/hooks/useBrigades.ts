@@ -30,19 +30,19 @@ export function useBrigades() {
     return () => clearTimeout(timer);
   }, [fetchBrigades]);
 
-  const createBrigade = async (name: string, coordinatorId: string) => {
+  const createBrigade = useCallback(async (name: string, coordinatorId: string) => {
     const newBrigade = await repo.createBrigade(name, coordinatorId);
     setBrigades(prev => [...prev, newBrigade]);
     return newBrigade;
-  };
+  }, []);
 
-  const assignMember = async (brigadeId: string, memberId: string) => {
+  const assignMember = useCallback(async (brigadeId: string, memberId: string) => {
     return repo.assignMember(brigadeId, memberId);
-  };
+  }, []);
 
-  const getBrigadistas = async () => {
+  const getBrigadistas = useCallback(async () => {
     return repo.getBrigadistas();
-  };
+  }, []);
 
   return {
     brigades,
